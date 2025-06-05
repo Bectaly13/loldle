@@ -1,0 +1,7 @@
+{
+  "name": "Loldle",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
