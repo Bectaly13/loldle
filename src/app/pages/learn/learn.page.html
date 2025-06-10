@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true" class="learn-content">
+
+    <div class="learn-menu">
+        <ion-button expand="block" (click)="mode = 'champion'">Apprendre par champion</ion-button>
+        <ion-button expand="block" (click)="mode = 'category'">Apprendre par catégorie</ion-button>
+    </div>
+
+    @if(mode === "champion") {
+        <p>Sélectionnez un champion pour voir ses attributs.</p>
+
+        <ion-list>
+            @for(champion of champions ; track $index) {
+                <ion-item (click)="selectChampion(champion)">
+                    <img class="champion-icon" [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start"/>
+                    <ion-label>{{champion.name}}</ion-label>
+                </ion-item>
+
+                @if(selectedChampion && selectedChampion.name === champion.name) {
+                    <ion-card>
+                        <ion-card-content>
+                            <p><strong>Genre : </strong>{{champion.gender}}</p>
+                            <p><strong>Rôle : </strong>{{champion.role.join(", ")}}</p>
+                            <p><strong>Espèce : </strong>{{champion.species.join(", ")}}</p>
+                            <p><strong>Ressource : </strong>{{champion.resource}}</p>
+                            <p><strong>Portée : </strong>{{champion.range.join(", ")}}</p>
+                            <p><strong>Région : </strong>{{champion.region.join(", ")}}</p>
+                            <p><strong>Année : </strong>{{champion.year}}</p>
+                        </ion-card-content>
+
+                        <ion-button expand="block" (click)="clearSelection()">Fermer</ion-button>
+                    </ion-card>
+                }
+            }
+        </ion-list>
+    }
+
+    @if(mode === "category") {
+        <div class="category-selection">
+            <ion-item>
+                <ion-label>Catégorie</ion-label>
+                <ion-select interface="popover" placeholder="Choisissez une catégorie" [ngModel]="selectedCategory" (ngModelChange)="selectCategory($event)">
+                    @for(category of categories; track $index) {
+                        <ion-select-option [value]="category">{{category.displayName}}</ion-select-option>
+                    }
+                </ion-select>
+            </ion-item>
+
+            @if(selectedCategory) {
+                <ion-item>
+                    <ion-label>Valeur</ion-label>
+                    <ion-select interface="popover" placeholder="Choisissez une valeur" [ngModel]="selectedValue" (ngModelChange)="selectValue($event)">
+                        @for(value of categoryValues; track $index) {
+                            <ion-select-option [value]="value">{{value}}</ion-select-option>
+                        }
+                    </ion-select>
+                </ion-item>
+            }
+
+            @if(selectedValue) {
+                <ion-button expand="block" (click)="clearCategorySelection()">Réinitialiser</ion-button>
+            }
+        </div>
+
+        @if(filteredChampions.length > 0) {
+            <ion-list>
+                @for(champion of filteredChampions; track $index) {
+                    <ion-item>
+                        <img class="champion-icon" [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start"/>
+                        <ion-label>
+                            {{champion.name}}
+
+                            @if(isExactMatch(champion)) {
+                                <ion-badge color="success">Exact</ion-badge>
+                            }
+
+                            @else {
+                                <ion-badge color="warning">Partiel</ion-badge>
+                            }
+                        </ion-label>
+                    </ion-item>
+                }
+            </ion-list>
+        }
+    }
+
+</ion-content>

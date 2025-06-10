@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <div class="background-grid">
+    @for(champion of championNames ; track $index) {
+      <img [src]="'assets/champion-icons/' + champion + '.png'" class="champion-icon"/>
+    }    
+  </div>
+
+  <div class="menu-content">
+
+    <div class="logo-container">
+      <img src="assets/icon/favicon.png">
+    </div>
+
+    <div class="title-container">
+      Loldle Infinite
+    </div>
+
+    <div class="buttons-container">
+      <app-button title="Classique" subtitle="Le mode de jeu orignal" path="classic" iconPath="assets/icons/classic.png"/>
+      <app-button title="Apprendre" subtitle="Découvrez les champions" path="learn" iconPath="assets/icons/learn.png"/>
+      <app-button title="Mes stats" subtitle="Consultez vos scores" path="stats" iconPath="assets/icons/stats.png"/>
+    </div>
+
+  </div>
+</ion-content>

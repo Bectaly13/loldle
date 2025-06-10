@@ -1,0 +1,136 @@
+:host {
+  --grid-padding: 10px;
+  --col-count: 8;
+  --grid-margin: 1px;
+  --square-length: calc((100vw - 2 * var(--grid-padding) - (var(--col-count) - 1) * 2 * var(--grid-margin)) / var(--col-count));
+}
+
+ion-content {
+  position: relative;
+}
+
+ion-grid {
+  padding-left: var(--grid-padding);
+  padding-right: var(--grid-padding);
+  padding-bottom: 10px;
+
+  display: grid;
+  justify-content: center;
+}
+
+ion-row {
+  flex-wrap: nowrap;
+}
+
+ion-col {
+  max-width: var(--square-length);
+  max-height: var(--square-length);
+  min-width: var(--square-length);
+  min-height: var(--square-length);
+  flex: 0 0 auto auto;
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 4px;
+  margin: var(--grid-margin);
+
+  background-color: rgb(71, 71, 71);
+
+  font-size: clamp(8px, 1.5vw, 12px);
+}
+
+ion-col img {
+  max-height: var(--square-length);
+  max-width: var(--square-length);
+  min-height: var(--square-length);
+  min-width: var(--square-length);
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65vw;
+  z-index: 10;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  max-height: 40vh;
+  overflow: auto;
+}
+
+.suggestions-list {
+  padding: 0;
+}
+
+.suggestions-item {
+  height: 40px;
+  font-size: 14px;
+  --padding-start: 8px;
+  --inner-padding-end: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestions-item img {
+  height: 32px;
+  width: 32px;
+}
+
+ion-item {
+  width: 80vw;
+  margin: 0 auto;
+  --background: transparent;
+  --inner-padding-end: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  border-radius: 8px;
+}
+
+.replay-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+ion-input {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.replay-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.replay-button {
+  --border-radius: 12px;
+  font-size: 1rem;
+}
+
+.success-item {
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.item-container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.success-container {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

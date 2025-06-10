@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true">
+    
+  @if(!won) {
+    <div class="item-container">
+      <ion-item>
+        <ion-input [(ngModel)]="query" placeholder="Tapez le nom d'un champion" (ionInput)="onInputChange()" (keydown.enter)="submitByEnter()"></ion-input>
+
+        @if(!won && history.length > 0) {
+          <ion-button (click)="confirmReset()" slot="end">
+            Reset
+          </ion-button>
+        }
+      </ion-item>
+    </div>
+  }
+
+  @else {
+    <div class="success-container">
+      <ion-item class="success-item" lines="none">
+        🎉 Bravo ! Vous avez trouvé {{answer.name}} en {{history.length}} essai{{history.length > 1 ? "s" : ""}}.
+      </ion-item>
+
+      <div class="replay-button-container">
+        <ion-button class="replay-button" (click)="resetGame()">
+          Rejouer
+        </ion-button>
+      </div>
+    </div>
+  }
+
+  <div class="suggestions-container">
+    @if(filteredChampions.length > 0) {
+        <ion-list class="suggestions-list">
+          @for(champion of filteredChampions ; track $index) {
+            <ion-item class="suggestions-item" button (click)="selectChampion(champion)">
+              <img [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start">
+              {{champion.name}}
+            </ion-item>
+          }
+        </ion-list>
+    }
+
+    @else {
+      @if(query.length > 0) {
+        <ion-item class="suggestions-item">
+          Pas de résultat.
+        </ion-item>
+      }
+    }
+  </div>
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col><strong>Champion</strong></ion-col>
+      <ion-col><strong>Genre</strong></ion-col>
+      <ion-col><strong>Rôle</strong></ion-col>
+      <ion-col><strong>Espèce</strong></ion-col>
+      <ion-col><strong>Ressource</strong></ion-col>
+      <ion-col><strong>Portée</strong></ion-col>
+      <ion-col><strong>Région</strong></ion-col>
+      <ion-col><strong>Année</strong></ion-col>
+    </ion-row>
+
+    @for(champion of history ; track $index) {
+      <ion-row>
+        <ion-col>
+          <img [src]="'assets/champion-icons/' + champion.name + '.png'">
+        </ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.gender, answer.gender)}">{{champion.gender}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.role, answer.role)}">{{champion.role.join(", ")}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.species, answer.species)}">{{champion.species.join(", ")}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.resource, answer.resource)}">{{champion.resource}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.range, answer.range)}">{{champion.range.join(", ")}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.region, answer.region)}">{{champion.region.join(", ")}}</ion-col>
+        <ion-col [ngStyle]="{'background-color': getAttributeColor(champion.year, answer.year)}">{{champion.year}}</ion-col>
+      </ion-row>
+    }
+  </ion-grid>
+
+</ion-content>
