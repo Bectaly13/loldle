@@ -5,8 +5,8 @@
 
   <div class="navbar-buttons">
     @for(button of buttons ; track $index) {
-      <div class="navbar-button" [class.active]="currentRoute === button">
-        <img [src]="'assets/icons/' + button + '.png'" (click)="goTo(button)" />
+      <div class="navbar-button">
+        <img [class.active]="currentRoute === button" [src]="'assets/icons/' + button + '.png'" (click)="goTo(button)" />
       </div>
     }
   </div>

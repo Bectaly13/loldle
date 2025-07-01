@@ -5,25 +5,33 @@
   padding: 16px;
 }
 
-.learn-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 1rem;
+.instruction {
+  text-align: center;
   margin-top: 3vh;
+  font-size: 1.1rem;
 }
 
 ion-list {
-  padding-top: 0px;
-}
-
-ion-button {
-    width: 90vw;
+  padding-top: 0;
+  width: 100%;
 }
 
 .champion-icon {
-    height: 32px;
-    width: auto;
+  height: 32px;
+  width: auto;
+}
+
+ion-card-content {
+  padding-bottom: 0px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+}
+
+.close-button {
+  --background: green;
+  --background-hover: rgb(0, 90, 0);
 }
