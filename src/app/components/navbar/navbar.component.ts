@@ -8,9 +8,14 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   title = input.required<string>();
-  buttons: string[] = ["menu", "classic", "learn", "stats"]
+  buttons: string[] = ["menu", "classic", "learn", "stats"];
+  currentRoute: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace("/", "");
+    });
+  }
 
   goTo(page: string) {
     this.router.navigate([page]);
