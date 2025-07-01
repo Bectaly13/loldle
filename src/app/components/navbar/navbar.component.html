@@ -1,0 +1,13 @@
+<div class="navbar-container">
+  <div class="navbar-title">
+    {{ title() }}
+  </div>
+
+  <div class="navbar-buttons">
+    @for(button of buttons ; track $index) {
+      <div class="navbar-button">
+        <img [src]="'assets/icons/' + button + '.png'" (click)="goTo(button)" />
+      </div>
+    }
+  </div>
+</div>

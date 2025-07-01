@@ -6,12 +6,14 @@ import { IonContent, ViewWillEnter, IonItem, IonList, IonInput, IonGrid, IonRow,
 import { ChampionsService, Champion } from 'src/app/services/champions.service';
 import { StorageService } from 'src/app/services/storage.service';
 
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+
 @Component({
   selector: 'app-classic',
   templateUrl: './classic.page.html',
   styleUrls: ['./classic.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, IonItem, IonList, IonInput, IonGrid, IonRow, IonCol, IonButton]
+  imports: [IonContent, CommonModule, FormsModule, IonItem, IonList, IonInput, IonGrid, IonRow, IonCol, IonButton, NavbarComponent]
 })
 export class ClassicPage implements ViewWillEnter {
   champions: Champion[] = [];

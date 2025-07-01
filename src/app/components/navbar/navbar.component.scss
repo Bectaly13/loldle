@@ -1,0 +1,35 @@
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  background-color: #2d2d2d;
+}
+
+.navbar-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.navbar-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar-button img {
+  width: 48px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-button img:hover {
+  transform: scale(1.1);
+}

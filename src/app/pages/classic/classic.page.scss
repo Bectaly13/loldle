@@ -61,6 +61,7 @@ ion-col img {
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   max-height: 40vh;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .suggestions-list {
