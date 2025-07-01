@@ -1,5 +1,5 @@
 :host {
-  --grid-padding: 10px;
+  --grid-padding: 5px;
   --col-count: 8;
   --grid-margin: 1px;
   --square-length: calc((100vw - 2 * var(--grid-padding) - (var(--col-count) - 1) * 2 * var(--grid-margin)) / var(--col-count));

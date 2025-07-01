@@ -121,7 +121,7 @@ export class ChampionsService {
     {name: "Cassiopeia", gender: "Féminin", role: ["Mid", "Top"], species: ["Humain", "Altéré Magiquement"], resource: "Mana", range: ["À distance"], region: ["Noxus", "Shurima"], year: 2010},
     {name: "Cho'Gath", gender: "Masculin", role: ["Top", "Mid"], species: ["Être du néant"], resource: "Mana", range: ["Mêlée"], region: ["Le Néant"], year: 2009},
     {name: "Corki", gender: "Masculin", role: ["ADC", "Mid"], species: ["Yordle"], resource: "Mana", range: ["À distance"], region: ["Bandle", "Piltover"], year: 2009},
-    {name: "Darius", gender: "Masculin", role: ["Top", "Jungle"], species: ["Humain"], resource: "Mana", range: ["Mêlée"], region: ["Noxus"], year: 2012},
+    {name: "Darius", gender: "Masculin", role: ["Jungle", "Top"], species: ["Humain"], resource: "Mana", range: ["Mêlée"], region: ["Noxus"], year: 2012},
     {name: "Diana", gender: "Féminin", role: ["Jungle", "Mid"], species: ["Hôte", "Humain"], resource: "Mana", range: ["Mêlée"], region: ["Targon"], year: 2012},
     {name: "Dr. Mundo", gender: "Masculin", role: ["Top"], species: ["Altéré Chimiquement", "Humain"], resource: "Coûts de santé", range: ["Mêlée"], region: ["Zaun"], year: 2009},
     {name: "Draven", gender: "Masculin", role: ["ADC"], species: ["Humain"], resource: "Mana", range: ["À distance"], region: ["Noxus"], year: 2012},
