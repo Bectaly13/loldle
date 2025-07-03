@@ -16,6 +16,10 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 })
 export class StatsClassicPage implements ViewWillEnter {
   stats: any[] = [];
+  wonCount = 0;
+  abandonedCount = 0;
+  totalCount = 0;
+  averageTries: string = "-";
 
   constructor(private storage: StorageService) { }
 
@@ -24,6 +28,17 @@ export class StatsClassicPage implements ViewWillEnter {
   }
 
   async getStats() {
-    this.stats = await this.storage.get("classic_stats_data");
+    const data = await this.storage.get("classic_stats_data");
+    this.stats = data || [];
+
+    this.totalCount = this.stats.length;
+    const wonGames = this.stats.filter(stat => stat.gameState === "Gagné");
+    this.wonCount = wonGames.length;
+    this.abandonedCount = this.totalCount - this.wonCount;
+    
+    if (wonGames.length > 0) {
+      const totalTries = wonGames.reduce((acc, stat) => acc + stat.tries, 0);
+      this.averageTries = (totalTries / wonGames.length).toFixed(2);
+    }
   }
 }

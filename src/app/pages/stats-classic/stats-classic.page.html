@@ -9,6 +9,13 @@
   }
 
   @else {
+    <div class="global-stats">
+      <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
+      <div class="stat-item">💤 Abandonnées : {{abandonedCount}}</div>
+      <div class="stat-item">📊 Total : {{totalCount}}</div>
+      <div class="stat-item">🔁 Moyenne d’essais : {{averageTries}}</div>
+    </div>
+
     <div class="stats-list">
       @for(stat of stats.slice().reverse(); track $index) {
         <div class="stat-card" [ngClass]="{'won': stat.gameState === 'Gagné', 'abandoned': stat.gameState === 'Abandonné'}">

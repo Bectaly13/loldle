@@ -87,3 +87,15 @@
     }
   }
 }
+
+.global-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+
+  .stat-item {
+    font-weight: 500;
+  }
+}
