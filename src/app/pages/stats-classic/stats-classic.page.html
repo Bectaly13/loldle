@@ -1,5 +1,34 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="stats-classic-content">
 
-  <app-navbar title="Mes stats : Classique"/>
+  <app-navbar title="Mes stats : Classique" />
+
+  @if(!stats.length) {
+    <div class="empty-stats-warning">
+      Aucun score à afficher.
+    </div>
+  }
+
+  @else {
+    <div class="stats-list">
+      @for(stat of stats.slice().reverse(); track $index) {
+        <div class="stat-card" [ngClass]="{'won': stat.gameState === 'Gagné', 'abandoned': stat.gameState === 'Abandonné'}">
+          
+          <div class="card-header">
+            <div class="state-label">{{stat.gameState}}</div>
+            <div class="date-label">{{stat.date}}</div>
+          </div>
+
+          <div class="stat-content">
+            <img [src]="stat.answer_icon" alt="Champion icon" class="champion-icon" />
+
+            <div class="stat-info">
+              <div class="champion-name">{{stat.answer_name}}</div>
+              <div class="tries">Essais : {{stat.tries}}</div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
 
 </ion-content>

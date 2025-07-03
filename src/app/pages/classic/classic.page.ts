@@ -161,11 +161,23 @@ export class ClassicPage implements ViewWillEnter {
       gameState: gameState,
       tries: this.history.length,
       answer_name: this.answer.name,
-      answer_icon: "assets/champion-icons/" + this.answer.name + ".png"
+      answer_icon: "assets/champion-icons/" + this.answer.name + ".png",
+      date: this.formatDate(new Date())
     }
 
     let classic_stats_data = await this.storage.get("classic_stats_data");
     classic_stats_data.push(stat);
     this.storage.set("classic_stats_data", classic_stats_data);
+  }
+
+  formatDate(date: Date): string {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, '0');
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 }

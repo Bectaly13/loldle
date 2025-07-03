@@ -1,0 +1,89 @@
+.stats-classic-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-stats-warning {
+  margin-top: 20vh;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 1rem;
+  font-style: italic;
+}
+
+.stats-list {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 12px;
+  color: white;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+
+  &.won {
+    background-color: #3aaa57;
+  }
+
+  &.abandoned {
+    background-color: #4e4e4e;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+
+    .state-label {
+      font-weight: bold;
+      opacity: 0.9;
+    }
+
+    .date-label {
+      font-style: italic;
+      opacity: 0.8;
+    }
+  }
+
+  .stat-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .champion-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .champion-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .tries {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+  }
+}
