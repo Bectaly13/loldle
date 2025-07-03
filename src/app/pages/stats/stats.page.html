@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>stats</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="stats-content">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">stats</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-navbar title="Mes stats"/>
+
+  <div class="stats-selection-text">
+    Choisissez le mode de jeu :
+  </div>
+
+  <div class="buttons-container">
+    <app-stats-button title="Classique" path="classic"/>
+  </div>
+
 </ion-content>

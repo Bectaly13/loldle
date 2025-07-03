@@ -58,6 +58,7 @@ export class ClassicPage implements ViewWillEnter {
 
     if (champion.name === this.answer.name) {
       this.won = true;
+      this.saveStats();
       this.storage.remove("classic_answer_data");
       this.storage.set("classic_history_data", []);
     }
@@ -117,7 +118,9 @@ export class ClassicPage implements ViewWillEnter {
         },
         {
           text: "Confirmer",
-          handler: (() => {this.resetGame();})
+          handler: (() => {
+            this.saveStats();
+            this.resetGame();})
         }
       ]
     });
@@ -142,5 +145,27 @@ export class ClassicPage implements ViewWillEnter {
   getChampionsData() {
     this.champions = this.champ.champions;
     this.n = this.champions.length;
+  }
+
+  async saveStats() {
+    let gameState: string = "";
+
+    if(this.won) {
+      gameState = "Gagné";
+    }
+    else {
+      gameState = "Abandonné";
+    }
+
+    let stat: any = {
+      gameState: gameState,
+      tries: this.history.length,
+      answer_name: this.answer.name,
+      answer_icon: "assets/champion-icons/" + this.answer.name + ".png"
+    }
+
+    let classic_stats_data = await this.storage.get("classic_stats_data");
+    classic_stats_data.push(stat);
+    this.storage.set("classic_stats_data", classic_stats_data);
   }
 }

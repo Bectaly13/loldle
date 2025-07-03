@@ -5,6 +5,7 @@ import { IonContent, ViewWillEnter } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 
 import { ChampionsService } from 'src/app/services/champions.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 import { ButtonComponent } from 'src/app/components/button/button.component';
 
@@ -19,10 +20,13 @@ export class MenuPage implements ViewWillEnter {
   championNames: string[] = this.champ.champions.map(c => c.name);
 
   constructor(private router: Router,
-              private champ: ChampionsService) { }
+              private champ: ChampionsService,
+              private storage: StorageService) { }
 
   ionViewWillEnter(): void {
     this.shuffleArray(this.championNames);
+
+    this.initStatsData();
   }
 
   shuffleArray(array: any[]) {
@@ -34,5 +38,13 @@ export class MenuPage implements ViewWillEnter {
 
   goToClassic() {
     this.router.navigate(["classic"]);
+  }
+
+  async initStatsData() {
+    const classic_stats_data = await this.storage.get("classic_stats_data");
+
+    if(!classic_stats_data) {
+      this.storage.set("classic_stats_data", []);
+    }
   }
 }

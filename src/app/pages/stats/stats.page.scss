@@ -1,0 +1,21 @@
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.stats-selection-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 3vh 0;
+  color: #ffffff;
+}
+
+.stats-buttons-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
