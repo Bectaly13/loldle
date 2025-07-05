@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   title = input.required<string>();
-  buttons: string[] = ["menu", "classic", "learn", "stats"];
+  buttons: string[] = ["menu", "classic", "characteristics", "filter", "chronology", "learn", "stats"];
   currentRoute: string = "";
 
   constructor(private router: Router) {

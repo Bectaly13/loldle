@@ -26,6 +26,7 @@ export class LearnPage implements ViewWillEnter {
   constructor(private champ: ChampionsService) { }
 
   ionViewWillEnter(): void {
+    this.selectedChampion = null;
   }
 
   selectChampion(champion: Champion) {

@@ -25,5 +25,29 @@ export const routes: Routes = [
     path: 'stats-classic',
     loadComponent: () => import('./pages/stats-classic/stats-classic.page').then( m => m.StatsClassicPage)
   },
+  {
+    path: 'characteristics',
+    loadComponent: () => import('./pages/characteristics/characteristics.page').then( m => m.CharacteristicsPage)
+  },
+  {
+    path: 'filter',
+    loadComponent: () => import('./pages/filter/filter.page').then( m => m.FilterPage)
+  },
+  {
+    path: 'chronology',
+    loadComponent: () => import('./pages/chronology/chronology.page').then( m => m.ChronologyPage)
+  },
+  {
+    path: 'stats-characteristics',
+    loadComponent: () => import('./pages/stats-characteristics/stats-characteristics.page').then( m => m.StatsCharacteristicsPage)
+  },
+  {
+    path: 'stats-filter',
+    loadComponent: () => import('./pages/stats-filter/stats-filter.page').then( m => m.StatsFilterPage)
+  },
+  {
+    path: 'stats-chronology',
+    loadComponent: () => import('./pages/stats-chronology/stats-chronology.page').then( m => m.StatsChronologyPage)
+  },
 
 ];
