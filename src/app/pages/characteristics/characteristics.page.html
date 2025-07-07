@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content #contentRef [fullscreen]="true">
 
     <app-navbar title="Caractéristiques" />
 
@@ -8,6 +8,21 @@
 			<div class="image-container">
 				<img [src]="'assets/champion-icons/' + champion.name + '.png'">
 			</div>
+
+			@if(showResult) {
+				<div class="result-container">
+					@if(won) {
+						<div class="result">Bonne réponse !</div>
+					}
+
+					@else {
+						<div class="result">Mauvaise réponse !</div>
+						<div class="answer">La bonne réponse était : {{answer.join(", ")}}</div>
+					}
+
+					<ion-button (click)="resetGame()">Rejouer</ion-button>
+				</div>
+			}
 
 			<ion-list>
 				@for(choice of choices ; track $index) {
@@ -29,21 +44,6 @@
 
 			@if(!showResult) {
 				<ion-button (click)="submit()">Valider</ion-button>
-			}
-
-			@else {
-				<div class="result-container">
-					@if(won) {
-						<div class="result">Bonne réponse !</div>
-					}
-
-					@else {
-						<div class="result">Mauvaise réponse !</div>
-						<div class="answer">La bonne réponse était : {{answer.join(", ")}}</div>
-					}
-
-					<ion-button (click)="resetGame()">Rejouer</ion-button>
-				</div>
 			}
 		</div>
 	}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, ViewWillEnter, IonList, IonItem, IonCheckbox, IonLabel, IonButton } from '@ionic/angular/standalone';
@@ -16,6 +16,8 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
   imports: [IonContent, CommonModule, FormsModule, NavbarComponent, IonList, IonItem, IonCheckbox, IonLabel, IonButton]
 })
 export class CharacteristicsPage implements ViewWillEnter {
+  @ViewChild("contentRef", {static: false}) content!: IonContent;
+
   champions: Champion[] = [];
   n: number = 0;
 
@@ -118,8 +120,14 @@ export class CharacteristicsPage implements ViewWillEnter {
     this.won = selected.length === correct.length && selected.every((val, i) => val === correct[i]);
     this.showResult = true;
 
+    this.scrollToTop();
+
     this.saveStats();
     this.clearData();
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(500);
   }
 
   async saveStats() {

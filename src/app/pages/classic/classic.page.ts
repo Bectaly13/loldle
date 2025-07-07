@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, ViewWillEnter, IonItem, IonList, IonInput, IonGrid, IonRow, IonCol, IonButton, AlertController } from '@ionic/angular/standalone';
@@ -16,6 +16,8 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
   imports: [IonContent, CommonModule, FormsModule, IonItem, IonList, IonInput, IonGrid, IonRow, IonCol, IonButton, NavbarComponent]
 })
 export class ClassicPage implements ViewWillEnter {
+  @ViewChild("contentRef", {static:false}) content!: IonContent;
+
   champions: Champion[] = [];
   n: number = 0;
 
@@ -58,9 +60,8 @@ export class ClassicPage implements ViewWillEnter {
 
     if (champion.name === this.answer.name) {
       this.won = true;
+      this.content.scrollToTop(500);
       this.saveStats();
-      this.storage.remove("classic_answer_data");
-      this.storage.set("classic_history_data", []);
     }
   }
 
@@ -168,6 +169,13 @@ export class ClassicPage implements ViewWillEnter {
     let classic_stats_data = await this.storage.get("classic_stats_data");
     classic_stats_data.push(stat);
     this.storage.set("classic_stats_data", classic_stats_data);
+
+    this.clearData();
+  }
+
+  clearData() {
+    this.storage.remove("classic_answer_data");
+    this.storage.remove("classic_history_data");
   }
 
   formatDate(date: Date): string {
