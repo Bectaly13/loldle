@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>filter</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">filter</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-navbar title="Filtrage" />
+
+  <div class="question">
+    Quels sont les champions dont {{attributeDisplay}} est {{value}} ?
+  </div>
+
+  <div class="champion-grid">
+    @for (choice of choices ; track $index) {
+      <div
+        class="champion-img"
+        [class.selected]="selectedChoices[$index]"
+        (click)="toggleSelection($index)">
+        <img [src]="'assets/champion-icons/' + choice.name + '.png'" />
+      </div>
+    }
+  </div>
+
+  @if(!showResult) {
+    <ion-button (click)="submit()">Valider</ion-button>
+  }
+
+  @else {
+    <div class="result">
+      @if (won) {
+        Bonne réponse !
+      }
+      
+      @else {
+        Mauvaise réponse !<br>
+        La bonne réponse était :<br>
+        @for (choice of choices; track $index) {
+          @if(correctIndexes[$index]) {
+            {{choice.name}}<br>
+          }
+        }
+      }
+    </div>
+
+    <ion-button (click)="resetGame()">Rejouer</ion-button>
+  }
 </ion-content>
