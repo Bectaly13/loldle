@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -5,6 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  imports: [CommonModule]
 })
 export class NavbarComponent {
   title = input.required<string>();
@@ -19,5 +21,11 @@ export class NavbarComponent {
 
   goTo(page: string) {
     this.router.navigate([page]);
+  }
+
+  splitButtons(): string[][] {
+    const a = this.buttons.slice(0, 4);
+    const b = this.buttons.slice(4, 7);
+    return [a, b];
   }
 }

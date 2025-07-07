@@ -1,17 +1,25 @@
 <div class="navbar-container">
   <div class="navbar-title">
-    {{ title() }}
+    {{title()}}
   </div>
 
   <div class="navbar-buttons">
-    @for(button of buttons ; track $index) {
-      <div class="navbar-button">
-        <img
-          [class.active]="currentRoute === button"
-          [src]="'assets/menu-icons/' + button + '.png'"
-          (click)="goTo(button)"
-        />
-      </div>
+    @for(row of splitButtons() ; track $index) {
+      <ng-container>
+        <div class="navbar-button-row" [ngClass]="{'extra-padding': $index > 0}">
+          @for(button of row ; track button) {
+            <ng-container>
+              <div class="navbar-button">
+                <img
+                  [class.active]="currentRoute === button"
+                  [src]="'assets/menu-icons/' + button + '.png'"
+                  (click)="goTo(button)"
+                />
+              </div>
+            </ng-container>
+          }
+        </div>
+      </ng-container>
     }
   </div>
 </div>
