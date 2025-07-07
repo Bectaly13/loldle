@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, ViewWillEnter } from '@ionic/angular/standalone';
+import { IonContent, ViewWillEnter } from '@ionic/angular/standalone';
 
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -12,7 +12,7 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
   templateUrl: './stats-characteristics.page.html',
   styleUrls: ['./stats-characteristics.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, NavbarComponent]
+  imports: [IonContent, CommonModule, FormsModule, NavbarComponent]
 })
 export class StatsCharacteristicsPage implements ViewWillEnter {
   stats: any[] = [];
