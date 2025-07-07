@@ -1,13 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>characteristics</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">characteristics</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+    <app-navbar title="Caractéristiques" />
+
+  	@if(champion) {
+		<div class="game-container">
+			<div class="question">Quel est {{attributeDisplay}} de <strong>{{champion.name}}</strong> ?</div>
+			<div class="image-container">
+				<img [src]="'assets/champion-icons/' + champion.name + '.png'">
+			</div>
+
+			<ion-list>
+				@for(choice of choices ; track $index) {
+					<ion-item
+						(click)="toggleCheckbox($index)"
+						[class.selected]="selectedChoices[$index]">
+						<ion-checkbox
+							slot="start"
+							[(ngModel)]="selectedChoices[$index]"
+							[value]="choice"
+							[disabled]="showResult"
+							(click)="$event.stopPropagation()"
+        					(ionChange)="onCheckboxChange($index, $event)">
+						</ion-checkbox>
+						<ion-label>{{choice}}</ion-label>
+					</ion-item>
+				}
+			</ion-list>
+
+			@if(!showResult) {
+				<ion-button (click)="submit()">Valider</ion-button>
+			}
+
+			@else {
+				<div class="result-container">
+					@if(won) {
+						<div class="result">Bonne réponse !</div>
+					}
+
+					@else {
+						<div class="result">Mauvaise réponse !</div>
+						<div class="answer">La bonne réponse était : {{answer.join(", ")}}</div>
+					}
+
+					<ion-button (click)="resetGame()">Rejouer</ion-button>
+				</div>
+			}
+		</div>
+	}
+
 </ion-content>

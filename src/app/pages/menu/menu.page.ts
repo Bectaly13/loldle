@@ -42,9 +42,14 @@ export class MenuPage implements ViewWillEnter {
 
   async initStatsData() {
     const classic_stats_data = await this.storage.get("classic_stats_data");
+    const characteristics_stats_data = await this.storage.get("characteristics_stats_data");
 
     if(!classic_stats_data) {
       this.storage.set("classic_stats_data", []);
+    }
+
+    if(!characteristics_stats_data) {
+      this.storage.set("characteristics_stats_data", []);
     }
   }
 }
