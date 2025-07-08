@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>chronology</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">chronology</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <app-navbar title="Chronologie" />
+
+  <div class="draggables" cdkDropList [cdkDropListData]="draggables" (cdkDropListDropped)="reorder($event)">
+    @for(champ of draggables ; track $index) {
+      <div class="champion-img" cdkDrag>
+        <img [src]="'assets/champion-icons/' + champ.name + '.png'" />
+
+        <div class="champion-name-banner">
+          {{champ.name}}
+        </div>
+      </div>
+    }
+  </div>
+
+  <ion-button expand="block" (click)="submit()">Valider</ion-button>
+
+  <div *ngIf="showResult">
+    <p *ngIf="won">✅ Bravo !</p>
+    <p *ngIf="!won">❌ Mauvais ordre !</p>
+    <ion-button (click)="resetGame()">Rejouer</ion-button>
+  </div>
 </ion-content>
