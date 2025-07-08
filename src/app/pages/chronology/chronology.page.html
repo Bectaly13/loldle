@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   
-  <app-navbar title="Chronologie" />
+  <app-navbar title="Chronologie"/>
 
   <div class="draggables" cdkDropList [cdkDropListData]="draggables" (cdkDropListDropped)="reorder($event)">
     @for(champ of draggables ; track $index) {
