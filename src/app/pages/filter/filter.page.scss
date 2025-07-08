@@ -8,10 +8,13 @@
 
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
   gap: 12px;
   padding: 16px;
   justify-items: center;
+  align-items: center;
+  max-width: 100%;
 }
 
 .champion-img {
@@ -22,10 +25,6 @@
   cursor: pointer;
 }
 
-.champion-img.selected {
-  background-color: #23af44;
-}
-
 .champion-img img {
   width: 80px;
   height: auto;
@@ -34,7 +33,29 @@
   display: block;
 }
 
+.champion-img.selected {
+  background-color: #23af44;
+}
+
+.champion-img.true-positive {
+  background-color: #23af44;
+}
+
+.champion-img.false-positive {
+  background-color: #e04e4e;
+}
+
+.champion-img.false-negative {
+  background-color: #e0982d;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .result {
+  margin-top: 10px;
   text-align: center;
   font-size: 18px;
 }

@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>stats-filter</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="stats-filter-content">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">stats-filter</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-navbar title="Mes stats : Filtrage"/>
+  
+  @if(!stats.length) {
+    <div class="empty-stats-warning">
+      Aucun score à afficher.
+    </div>
+  }
+
+  @else {
+    <div class="global-stats">
+      <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
+      <div class="stat-item">❌ Perdues : {{lostCount}}</div>
+      <div class="stat-item">📊 Total : {{totalCount}}</div>
+    </div>
+
+    <div class="stats-list">
+      @for(stat of stats.slice().reverse(); track $index) {
+        <div class="stat-card" [ngClass]="{'won': stat.gameState === 'Gagné', 'lost': stat.gameState === 'Perdu'}">
+          
+          <div class="card-header">
+            <div class="state-label">{{stat.gameState}}</div>
+            <div class="date-label">{{stat.date}}</div>
+          </div>
+
+          <div class="stat-content">
+
+            <div class="stat-info">
+              <div class="characteristics">{{stat.attribute}} : {{stat.value}}</div>
+              <div class="answer">Bonne réponse : {{stat.answer.length > 0 ? stat.answer.join(", ") : "-"}}</div>
+              @if(stat.gameState === "Perdu") {
+                <div class="user-answer">Votre réponse : {{stat.user_answer.length > 0 ? stat.user_answer.join(", ") : "-"}}</div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
 </ion-content>

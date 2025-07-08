@@ -114,5 +114,92 @@ export class FilterPage implements ViewWillEnter {
     const userCorrect = correctIndexes.every((val, i) => val === this.selectedChoices[i]);
 
     this.won = userCorrect;
+
+    this.saveStats();
+    this.clearData();
+  }
+
+  getResultClass(index: number): string {
+    if (!this.showResult) {
+      return this.selectedChoices[index] ? "selected" : "";
+    }
+
+    const isSelected = this.selectedChoices[index];
+    const isCorrect = this.correctIndexes[index];
+
+    if (isSelected && isCorrect) {
+      return "true-positive";
+    } else if (!isSelected && !isCorrect) {
+      return "";
+    } else if (isSelected && !isCorrect) {
+      return "false-positive";
+    } else if (!isSelected && isCorrect) {
+      return "false-negative";
+    }
+
+    return "";
+  }
+
+  async saveStats() {
+    let gameState: string = "";
+
+    if(this.won) {
+      gameState = "Gagné";
+    }
+    else {
+      gameState = "Perdu";
+    }
+
+    let attributeStats: string = "";
+
+    for(let i = 0; i<this.possibleAttributes.length; i++) {
+      if(this.possibleAttributes[i] === this.attribute) {
+        attributeStats = this.possibleAttributesStats[i];
+        break;
+      }
+    }
+
+    let answer: string[] = [];
+    let user_answer: string[] = [];
+
+    for(let i = 0; i<this.choices.length; i++) {
+      if(this.correctIndexes[i]) {
+        answer.push(this.choices[i].name);
+      }
+      if(this.selectedChoices[i]) {
+        user_answer.push(this.choices[i].name);
+      }
+    }
+
+    let stat: any = {
+      gameState: gameState,
+      attribute: attributeStats,
+      value: this.value,
+      answer: answer,
+      user_answer: user_answer,
+      date: this.formatDate(new Date())
+    }
+
+    let filter_stats_data = await this.storage.get("filter_stats_data");
+    filter_stats_data.push(stat);
+    this.storage.set("filter_stats_data", filter_stats_data);
+  }
+
+  formatDate(date: Date): string {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, '0');
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+
+  clearData() {
+    this.storage.remove("filter_attribute_data");
+    this.storage.remove("filter_attribute_display_data");
+    this.storage.remove("filter_choices_data");
+    this.storage.remove("filter_value_data");
   }
 }
