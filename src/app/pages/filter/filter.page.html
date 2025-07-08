@@ -11,7 +11,12 @@
         class="champion-img"
         [ngClass]="getResultClass($index)"
         (click)="toggleSelection($index)">
+
         <img [src]="'assets/champion-icons/' + choice.name + '.png'" />
+
+        <div class="champion-name-banner">
+          {{choice.name}}
+        </div>
       </div>
     }
   </div>
