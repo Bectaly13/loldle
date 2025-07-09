@@ -17,8 +17,8 @@
   <ion-button expand="block" (click)="submit()">Valider</ion-button>
 
   <div *ngIf="showResult">
-    <p *ngIf="won">✅ Bravo !</p>
-    <p *ngIf="!won">❌ Mauvais ordre !</p>
+    <p *ngIf="won">Bravo !</p>
+    <p *ngIf="!won">Mauvais ordre !</p>
     <ion-button (click)="resetGame()">Rejouer</ion-button>
   </div>
 </ion-content>
