@@ -1,19 +1,30 @@
-.slots, .draggables {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 16px 0;
+.question {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 8px;
+  padding-top: 16px;
+}
+
+.champion-grid {
+  height: 190px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px;
+  justify-items: center;
+  align-items: center;
+  max-width: 100%;
 }
 
 .champion-img {
   overflow: hidden;
-  transition: background-color 0.3s ease;
   padding: 6px;
   cursor: pointer;
 
   .champion-name-banner {
-    width: 70px;
-    font-size: 11px;
+    width: 80px;
+    font-size: 13px;
     text-align: center;
     color: white;
     backdrop-filter: blur(3px);
@@ -28,24 +39,52 @@
 }
 
 .champion-img img {
-  width: 70px;
+  width: 80px;
   height: auto;
   object-fit: cover;
   display: block;
 }
 
-.slot, .champion-block {
-  width: 100px;
-  height: 40px;
-  margin: 8px;
-  border: 2px dashed #a5a5a5;
+.swap-buttons {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  background: #f4f4f4;
+  gap: 6px;
+  width: 80px;
+  margin-top: 6px;
 }
 
-.champion-block {
-  background: rgb(71, 71, 71);
+.left-button {
+  width: 37px;
+  margin-left: auto;
+}
+
+.right-button {
+  width: 37px;
+  margin-right: auto;
+}
+
+.swap-button {
+  width: 20px;
+  height: 20px;
+  min-height: 10px;
+  min-width: 10px;
+}
+
+.champion-year {
+  font-size: auto;
+  height: 28.67px;
+  width: 80px;
+  margin-top: 6px;
+  text-align: center;
+  align-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.result {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 18px;
 }

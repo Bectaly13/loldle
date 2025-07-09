@@ -62,6 +62,7 @@ export class ClassicPage implements ViewWillEnter {
       this.won = true;
       this.content.scrollToTop(500);
       this.saveStats();
+      this.clearData();
     }
   }
 
@@ -121,6 +122,7 @@ export class ClassicPage implements ViewWillEnter {
           text: "Confirmer",
           handler: (() => {
             this.saveStats();
+            this.clearData();
             this.resetGame();})
         }
       ]
@@ -169,8 +171,6 @@ export class ClassicPage implements ViewWillEnter {
     let classic_stats_data = await this.storage.get("classic_stats_data");
     classic_stats_data.push(stat);
     this.storage.set("classic_stats_data", classic_stats_data);
-
-    this.clearData();
   }
 
   clearData() {
