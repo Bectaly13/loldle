@@ -26,10 +26,10 @@
           </div>
 
           <div class="stat-content">
-            <img [src]="stat.answer_icon" alt="Champion icon" class="champion-icon" />
+            <img [src]="'assets/champion-icons/' + stat.answer + '.png'" alt="Champion icon" class="champion-icon" />
 
             <div class="stat-info">
-              <div class="champion-name">{{stat.answer_name}}</div>
+              <div class="champion-name">{{stat.answer}}</div>
               <div class="tries">Essais : {{stat.tries}}</div>
             </div>
           </div>

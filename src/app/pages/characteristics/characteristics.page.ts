@@ -161,8 +161,7 @@ export class CharacteristicsPage implements ViewWillEnter {
       answer: this.answer,
       attribute: attribute,
       user_answer: user_answer,
-      answer_name: this.champion.name,
-      answer_icon: "assets/champion-icons/" + this.champion.name + ".png",
+      champion_name: this.champion.name,
       date: this.formatDate(new Date())
     }
 

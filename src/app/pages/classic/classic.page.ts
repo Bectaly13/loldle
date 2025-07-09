@@ -163,8 +163,7 @@ export class ClassicPage implements ViewWillEnter {
     let stat: any = {
       gameState: gameState,
       tries: this.history.length,
-      answer_name: this.answer.name,
-      answer_icon: "assets/champion-icons/" + this.answer.name + ".png",
+      answer: this.answer.name,
       date: this.formatDate(new Date())
     }
 

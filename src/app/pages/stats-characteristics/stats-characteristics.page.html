@@ -25,10 +25,10 @@
           </div>
 
           <div class="stat-content">
-            <img [src]="stat.answer_icon" alt="Champion icon" class="champion-icon" />
+            <img [src]="'assets/champion-icons/' + stat.champion_name + '.png'" alt="Champion icon" class="champion-icon" />
 
             <div class="stat-info">
-              <div class="characteristics">{{stat.answer_name}} : {{stat.attribute}}</div>
+              <div class="characteristics">{{stat.champion_name}} : {{stat.attribute}}</div>
               <div class="answer">Bonne réponse : {{stat.answer.join(", ")}}</div>
               @if(stat.gameState === "Perdu") {
                 <div class="user-answer">Votre réponse : {{stat.user_answer.length > 0 ? stat.user_answer.join(", ") : "-"}}</div>
