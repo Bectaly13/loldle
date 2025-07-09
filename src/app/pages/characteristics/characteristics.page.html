@@ -9,7 +9,13 @@
 				<img [src]="'assets/champion-icons/' + champion.name + '.png'">
 			</div>
 
-			@if(showResult) {
+			@if(!showResult) {
+				<ion-button (click)="submit()">Valider</ion-button>
+			}
+
+			@else {
+				<ion-button (click)="resetGame()">Rejouer</ion-button>
+				
 				<div class="result-container">
 					@if(won) {
 						<div class="result">Bonne réponse !</div>
@@ -19,8 +25,6 @@
 						<div class="result">Mauvaise réponse !</div>
 						<div class="answer">La bonne réponse était : {{answer.join(", ")}}</div>
 					}
-
-					<ion-button (click)="resetGame()">Rejouer</ion-button>
 				</div>
 			}
 
@@ -41,10 +45,6 @@
 					</ion-item>
 				}
 			</ion-list>
-
-			@if(!showResult) {
-				<ion-button (click)="submit()">Valider</ion-button>
-			}
 		</div>
 	}
 

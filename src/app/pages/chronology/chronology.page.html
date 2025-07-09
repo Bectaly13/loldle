@@ -2,72 +2,71 @@
   
   <app-navbar title="Chronologie"/>
 
-  <div class="question">
-    Trier les champions par <strong>date de sortie</strong>.
-  </div>
+  <div class="game-container">
+    
+    <div class="question">
+      Trier les champions par <strong>date de sortie</strong>.
+    </div>
 
-  <div class="champion-grid">
-    @for (choice of choices ; track $index) {
+    <div class="champion-grid">
+      @for (choice of choices ; track $index) {
 
-      <div class="champion-img">
-        <img [src]="'assets/champion-icons/' + choice.name + '.png'" />
+        <div class="champion-img">
+          <img [src]="'assets/champion-icons/' + choice.name + '.png'" />
 
-        <div class="champion-name-banner">
-          {{choice.name}}
-        </div>
-
-        @if(!showResult) {
-          <div class="swap-buttons">
-            
-              <div class="left-button">
-                @if($index > 0) {
-                  <ion-button class="swap-button" (click)="moveLeft($index)">&lt;</ion-button>
-                }
-              </div>
-            
-              <div class="right-button">
-                @if($index < choices.length - 1) {
-                  <ion-button class="swap-button" (click)="moveRight($index)">&gt;</ion-button>
-                }
-              </div>
-            
+          <div class="champion-name-banner">
+            {{choice.name}}
           </div>
+
+          @if(!showResult) {
+            <div class="swap-buttons">
+              
+                <div class="left-button">
+                  @if($index > 0) {
+                    <ion-button class="swap-button" (click)="moveLeft($index)">&lt;</ion-button>
+                  }
+                </div>
+              
+                <div class="right-button">
+                  @if($index < choices.length - 1) {
+                    <ion-button class="swap-button" (click)="moveRight($index)">&gt;</ion-button>
+                  }
+                </div>
+              
+            </div>
+          }
+
+          @else {
+            <div class="champion-year">
+              {{choice.year}}
+            </div>
+          }
+
+        </div>
+      }
+    </div>
+
+    @if(!showResult) {
+      <ion-button (click)="submit()">Valider</ion-button>
+    }
+
+    @else {
+      <ion-button (click)="resetGame()">Rejouer</ion-button>
+
+      <div class="result">
+        @if(won) {
+          <p>
+            Bonne réponse !
+          </p>
         }
 
         @else {
-          <div class="champion-year">
-            {{choice.year}}
-          </div>
+          <p>
+            Mauvaise réponse !
+          </p>
         }
-
       </div>
     }
   </div>
-
-  @if(!showResult) {
-    <div class="button-container">
-      <ion-button (click)="submit()">Valider</ion-button>
-    </div>
-  }
-
-  @else {
-    <div class="button-container">
-      <ion-button (click)="resetGame()">Rejouer</ion-button>
-    </div>
-
-    <div class="result">
-      @if(won) {
-        <p>
-          Bravo !
-        </p>
-      }
-
-      @else {
-        <p>
-          Mauvais ordre !
-        </p>
-      }
-    </div>
-  }
 
 </ion-content>

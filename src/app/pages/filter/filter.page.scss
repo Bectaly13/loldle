@@ -1,3 +1,9 @@
+.game-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
 .question {
   font-size: 1.2rem;
   font-weight: 500;
@@ -62,11 +68,6 @@
 
 .champion-img.false-negative {
   background-color: #e0982d;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
 }
 
 .result {
