@@ -180,7 +180,7 @@ export class FilterPage implements ViewWillEnter {
       date: this.formatDate(new Date())
     }
 
-    let filter_stats_data = await this.storage.get("filter_stats_data");
+    let filter_stats_data = await this.storage.get("filter_stats_data") || [];
     filter_stats_data.push(stat);
     this.storage.set("filter_stats_data", filter_stats_data);
   }

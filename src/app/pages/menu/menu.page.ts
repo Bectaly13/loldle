@@ -25,8 +25,6 @@ export class MenuPage implements ViewWillEnter {
 
   ionViewWillEnter(): void {
     this.shuffleArray(this.championNames);
-
-    this.initStatsData();
   }
 
   shuffleArray(array: any[]) {
@@ -38,28 +36,5 @@ export class MenuPage implements ViewWillEnter {
 
   goToClassic() {
     this.router.navigate(["classic"]);
-  }
-
-  async initStatsData() {
-    const classic_stats_data = await this.storage.get("classic_stats_data");
-    const characteristics_stats_data = await this.storage.get("characteristics_stats_data");
-    const filter_stats_data = await this.storage.get("filter_stats_data");
-    const chronology_stats_data = await this.storage.get("chronology_stats_data");
-
-    if(!classic_stats_data) {
-      this.storage.set("classic_stats_data", []);
-    }
-
-    if(!characteristics_stats_data) {
-      this.storage.set("characteristics_stats_data", []);
-    }
-
-    if(!filter_stats_data) {
-      this.storage.set("filter_stats_data", []);
-    }
-
-    if(!chronology_stats_data) {
-      this.storage.set("chronology_stats_data", []);
-    }
   }
 }

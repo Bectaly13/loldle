@@ -166,7 +166,7 @@ export class CharacteristicsPage implements ViewWillEnter {
       date: this.formatDate(new Date())
     }
 
-    let characteristics_stats_data = await this.storage.get("characteristics_stats_data");
+    let characteristics_stats_data = await this.storage.get("characteristics_stats_data") || [];
     characteristics_stats_data.push(stat);
     this.storage.set("characteristics_stats_data", characteristics_stats_data);
   }

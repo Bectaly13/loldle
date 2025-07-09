@@ -168,7 +168,7 @@ export class ClassicPage implements ViewWillEnter {
       date: this.formatDate(new Date())
     }
 
-    let classic_stats_data = await this.storage.get("classic_stats_data");
+    let classic_stats_data = await this.storage.get("classic_stats_data") || [];
     classic_stats_data.push(stat);
     this.storage.set("classic_stats_data", classic_stats_data);
   }

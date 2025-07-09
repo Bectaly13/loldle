@@ -97,11 +97,11 @@ export class ChronologyPage implements ViewWillEnter {
     let stat: any = {
       gameState: gameState,
       user_answer: this.choices.map(champ => champ.name),
-      answer: this.choices.sort((a, b) => a.year - b.year).map(champ => champ.name),
+      answer: [...this.choices].sort((a, b) => a.year - b.year).map(champ => champ.name),
       date: this.formatDate(new Date())
     }
 
-    let chronology_stats_data = await this.storage.get("chronology_stats_data");
+    let chronology_stats_data = await this.storage.get("chronology_stats_data") || [];
     chronology_stats_data.push(stat);
     this.storage.set("chronology_stats_data", chronology_stats_data);
   }
