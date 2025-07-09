@@ -1,20 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, ViewWillEnter } from '@ionic/angular/standalone';
+
+import { StorageService } from 'src/app/services/storage.service';
+
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-stats-chronology',
   templateUrl: './stats-chronology.page.html',
   styleUrls: ['./stats-chronology.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, CommonModule, FormsModule, NavbarComponent]
 })
-export class StatsChronologyPage implements OnInit {
+export class StatsChronologyPage implements ViewWillEnter {
+  stats: any[] = [];
+  totalCount: number = 0;
+  wonCount: number = 0;
+  lostCount: number = 0;
 
-  constructor() { }
+  constructor(private storage: StorageService) { }
 
-  ngOnInit() {
+  ionViewWillEnter(): void {
+    this.getStats();
   }
 
+  async getStats() {
+    this.stats = await this.storage.get("chronology_stats_data");
+
+    this.totalCount = this.stats.length;
+    const wonGames = this.stats.filter(stat => stat.gameState === "Gagné");
+    this.wonCount = wonGames.length;
+    this.lostCount = this.totalCount - this.wonCount;
+  }
 }
