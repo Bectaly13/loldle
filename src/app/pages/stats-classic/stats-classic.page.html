@@ -9,11 +9,15 @@
   }
 
   @else {
-    <div class="global-stats">
-      <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
-      <div class="stat-item">💤 Abandonnées : {{abandonedCount}}</div>
-      <div class="stat-item">📊 Total : {{totalCount}}</div>
-      <div class="stat-item">🔁 Moyenne d'essais (quand gagné) : {{averageTries}}</div>
+    <div class="stats-header">
+      <div class="global-stats">
+        <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
+        <div class="stat-item">💤 Abandonnées : {{abandonedCount}}</div>
+        <div class="stat-item">📊 Total : {{totalCount}}</div>
+        <div class="stat-item">🔁 Moyenne d'essais (quand gagné) : {{averageTries}}</div>
+      </div>
+
+      <app-delete-stats-button/>
     </div>
 
     <div class="stats-list">

@@ -9,10 +9,14 @@
   }
 
   @else {
-    <div class="global-stats">
-      <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
-      <div class="stat-item">❌ Perdues : {{lostCount}}</div>
-      <div class="stat-item">📊 Total : {{totalCount}}</div>
+    <div class="stats-header">
+      <div class="global-stats">
+        <div class="stat-item">🎯 Gagnées : {{wonCount}}</div>
+        <div class="stat-item">❌ Perdues : {{lostCount}}</div>
+        <div class="stat-item">📊 Total : {{totalCount}}</div>
+      </div>
+
+      <app-delete-stats-button/>
     </div>
 
     <div class="stats-list">

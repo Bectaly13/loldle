@@ -6,13 +6,14 @@ import { IonContent, ViewWillEnter } from '@ionic/angular/standalone';
 import { StorageService } from 'src/app/services/storage.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { DeleteStatsButtonComponent } from 'src/app/components/delete-stats-button/delete-stats-button.component';
 
 @Component({
   selector: 'app-stats-filter',
   templateUrl: './stats-filter.page.html',
   styleUrls: ['./stats-filter.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, NavbarComponent]
+  imports: [IonContent, CommonModule, FormsModule, NavbarComponent, DeleteStatsButtonComponent]
 })
 export class StatsFilterPage implements ViewWillEnter {
   stats: any[] = [];
