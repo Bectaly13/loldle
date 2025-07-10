@@ -27,7 +27,7 @@ export class StatsCharacteristicsPage implements ViewWillEnter {
   }
 
   async getStats() {
-    this.stats = await this.storage.get("characteristics_stats_data");
+    this.stats = await this.storage.get("characteristics_stats_data") || [];
 
     this.totalCount = this.stats.length;
     const wonGames = this.stats.filter(stat => stat.gameState === "Gagné");
