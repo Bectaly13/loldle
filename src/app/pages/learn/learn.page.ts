@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, ViewWillEnter, IonButton, IonItem, IonLabel, IonList, IonCard, IonCardContent} from '@ionic/angular/standalone';
 
-import { ChampionsService, Champion, Name } from 'src/app/services/champions.service';
+import { ChampionsService, Champion } from 'src/app/services/champions.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
