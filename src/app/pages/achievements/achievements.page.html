@@ -1,0 +1,44 @@
+<ion-content>
+
+  <app-navbar title="Mes succès"/>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Statistiques des succès</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Succès :</strong> {{countUnlocked()}} / {{totalAchievements()}} ({{unlockedPercentage()}}%)</p>
+      <p><strong>Progression :</strong> {{totalLevelScore()}} / {{maxLevelScore()}} ({{levelProgressionPercentage()}}%)</p>
+
+      <div *ngFor="let level of levels">
+        <img [src]="'assets/achievements-icons/' + level + '.png'"/>
+        <strong>{{level | titlecase}} :</strong> {{countByLevel(level)}}
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let ach of achievements">
+      <ion-label>
+        <h2 *ngIf="ach.unlocked; else hidden">{{ach.title}}</h2>
+        <p *ngIf="ach.unlocked">{{ach.subtitle}}</p>
+        <img [src]="'assets/achievements-icons/' + ach.level + '.png'"/>
+        <p>
+          Progression :
+          <ng-container *ngIf="getNextThreshold(ach) as next; else maxedOut">
+            {{ ach.value }} / {{ next }}
+          </ng-container>
+          <ng-template #maxedOut>
+            {{ ach.value }} (maximum)
+          </ng-template>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ng-template #hidden>
+      <h2>???</h2>
+      <p>Succès caché</p>
+    </ng-template>
+  </ion-list>
+
+</ion-content>

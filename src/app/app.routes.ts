@@ -49,5 +49,9 @@ export const routes: Routes = [
     path: 'stats-chronology',
     loadComponent: () => import('./pages/stats-chronology/stats-chronology.page').then( m => m.StatsChronologyPage)
   },
+  {
+    path: 'achievements',
+    loadComponent: () => import('./pages/achievements/achievements.page').then( m => m.AchievementsPage)
+  },
 
 ];

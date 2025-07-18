@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   title = input.required<string>();
-  buttons: string[] = ["menu", "classic", "characteristics", "filter", "chronology", "learn", "stats"];
+  buttons: string[] = ["menu", "classic", "characteristics", "filter", "chronology", "learn", "stats", "achievements"];
   currentRoute: string = "";
 
   constructor(private router: Router) {
@@ -25,7 +25,7 @@ export class NavbarComponent {
 
   splitButtons(): string[][] {
     const a = this.buttons.slice(0, 4);
-    const b = this.buttons.slice(4, 7);
+    const b = this.buttons.slice(4, 8);
     return [a, b];
   }
 }

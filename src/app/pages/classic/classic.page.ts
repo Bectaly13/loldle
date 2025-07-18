@@ -5,6 +5,7 @@ import { IonContent, ViewWillEnter, IonItem, IonList, IonInput, IonGrid, IonRow,
 
 import { ChampionsService, Champion } from 'src/app/services/champions.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { AchievementsService } from 'src/app/services/achievements.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
@@ -31,7 +32,8 @@ export class ClassicPage implements ViewWillEnter {
 
   constructor(private champ: ChampionsService,
               private alert: AlertController,
-              private storage: StorageService) { }
+              private storage: StorageService,
+              private ach: AchievementsService) { }
 
   ionViewWillEnter(): void {
     this.getChampionsData();
@@ -59,6 +61,10 @@ export class ClassicPage implements ViewWillEnter {
     this.storage.set("classic_history_data", this.history);
 
     if (champion.name === this.answer.name) {
+      if(this.history.length <= 3) {
+        this.ach.increment("classic_expert")
+      }
+
       this.won = true;
       this.content.scrollToTop(500);
       this.saveStats();
