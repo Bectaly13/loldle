@@ -5,6 +5,7 @@ import { IonContent, ViewWillEnter, IonButton} from '@ionic/angular/standalone';
 
 import { ChampionsService, Champion } from 'src/app/services/champions.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { AchievementsService } from 'src/app/services/achievements.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
@@ -35,7 +36,8 @@ export class FilterPage implements ViewWillEnter {
   won: boolean = false;
 
   constructor(private champ: ChampionsService,
-              private storage: StorageService) { }
+              private storage: StorageService,
+              private ach: AchievementsService) { }
 
   ionViewWillEnter(): void {
     this.getChampionsData();
@@ -114,6 +116,10 @@ export class FilterPage implements ViewWillEnter {
     const userCorrect = correctIndexes.every((val, i) => val === this.selectedChoices[i]);
 
     this.won = userCorrect;
+
+    if(this.won) {
+      this.ach.increment("filter_enjoyer");
+    }
 
     this.saveStats();
     this.clearData();

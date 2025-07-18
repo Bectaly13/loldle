@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 import { StorageService } from './storage.service';
 
@@ -25,13 +26,17 @@ export interface Achievement {
 export class AchievementsService {
   private achievements: Achievement[] = [];
 
+  private toastQueue: Achievement[] = [];
+  private isShowingToast = false;
+
   levels: AchievementLevel[] = [
     "Bloqué", "Fer", "Bronze", "Argent", "Or",
     "Platine", "Émeraude", "Diamant", "Maître",
     "Grand-maître", "Challenger"
   ];
 
-  constructor(private storage: StorageService) {
+  constructor(private storage: StorageService,
+              private toast: ToastController) {
     this.init();
   }
 
@@ -64,6 +69,24 @@ export class AchievementsService {
         title: "Dieu du mode Classique",
         subtitle: "Gagner des parties en 1 essai dans le mode Classique.",
         thresholds: [1, 2, 3, 4, 6, 8, 10, 12, 16, 20]
+      },
+      {
+        id: "characteristics_enjoyer",
+        title: "Amateur du mode Caractéristiques",
+        subtitle: "Gagner des parties dans le mode Caractéristiques.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "filter_enjoyer",
+        title: "Amateur du mode Filtrage",
+        subtitle: "Gagner des parties dans le mode Filtrage.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "chronology_enjoyer",
+        title: "Amateur du mode Chronologie",
+        subtitle: "Gagner des parties dans le mode Chronologie.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       }
     ]
 
@@ -103,6 +126,8 @@ export class AchievementsService {
     const ach = this.achievements.find(a => a.id === id);
 
     if (ach) {
+      const previousLevel = ach.level;
+
       ach.value += 1;
 
       if (!ach.unlocked && ach.value >= 1) {
@@ -112,6 +137,54 @@ export class AchievementsService {
       ach.level = this.getAchievementLevel(ach.value, ach.thresholds);
 
       this.storage.set("achievements_data", this.achievements);
+
+      const levelIndex = this.levels.indexOf(ach.level);
+      const prevLevelIndex = this.levels.indexOf(previousLevel);
+
+      if (levelIndex > prevLevelIndex) {
+        this.enqueueToast(ach);
+      }
+    }
+  }
+
+  private enqueueToast(achievement: Achievement) {
+    this.toastQueue.push(achievement);
+    if (!this.isShowingToast) {
+      this.processToastQueue();
+    }
+  }
+
+  private async processToastQueue() {
+    if (this.toastQueue.length === 0) {
+      this.isShowingToast = false;
+      return;
+    }
+
+    this.isShowingToast = true;
+    const achievement = this.toastQueue.shift();
+
+    if (achievement) {
+      let achievementState: string = "";
+      if(achievement.level == "Fer") {
+        achievementState = "débloqué";
+      }
+      else {
+        achievementState = "amélioré";
+      }
+      
+      const toast = await this.toast.create({
+        message: "Succès " + achievementState + ` ! ${achievement.title} est maintenant niveau ${achievement.level} !`,
+        duration: 3000,
+        position: "bottom",
+        color: "light",
+        keyboardClose: true,
+        swipeGesture: "vertical"
+      });
+
+      await toast.present();
+      await toast.onDidDismiss();
+
+      this.processToastQueue();
     }
   }
 }

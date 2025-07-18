@@ -7,12 +7,12 @@
       <ion-card-title>Statistiques des succès</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Succès découverts :</strong> {{countUnlocked()}} / {{totalAchievements()}} ({{unlockedPercentage()}}%)</p>
+      <p><strong>Succès débloqués :</strong> {{countUnlocked()}} / {{totalAchievements()}} ({{unlockedPercentage()}}%)</p>
       <p><strong>Progression :</strong> {{totalLevelScore()}} / {{maxLevelScore()}} ({{levelProgressionPercentage()}}%)</p>
 
       <div *ngFor="let level of levels">
         <img [src]="'assets/achievements-icons/' + level + '.png'"/>
-        <strong>{{level | titlecase}} :</strong> {{countByLevel(level)}}
+        <strong>{{level}} :</strong> {{countByLevel(level)}}
       </div>
     </ion-card-content>
   </ion-card>

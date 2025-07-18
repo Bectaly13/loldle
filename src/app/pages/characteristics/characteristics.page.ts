@@ -5,6 +5,7 @@ import { IonContent, ViewWillEnter, IonList, IonItem, IonCheckbox, IonLabel, Ion
 
 import { ChampionsService, Champion } from 'src/app/services/champions.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { AchievementsService } from 'src/app/services/achievements.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
@@ -37,7 +38,8 @@ export class CharacteristicsPage implements ViewWillEnter {
   won: boolean = false;
 
   constructor(private champ: ChampionsService,
-              private storage: StorageService) { }
+              private storage: StorageService,
+              private ach: AchievementsService) { }
 
   ionViewWillEnter(): void {
     this.getChampionsData();
@@ -119,6 +121,10 @@ export class CharacteristicsPage implements ViewWillEnter {
 
     this.won = selected.length === correct.length && selected.every((val, i) => val === correct[i]);
     this.showResult = true;
+
+    if(this.won) {
+      this.ach.increment("characteristics_enjoyer");
+    }
 
     this.scrollToTop();
 
