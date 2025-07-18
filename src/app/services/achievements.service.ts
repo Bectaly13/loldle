@@ -54,39 +54,57 @@ export class AchievementsService {
     const defs: AchievementDefinition[] = [
       {
         id: "classic_enjoyer",
-        title: "Amateur du mode Classique",
-        subtitle: "Gagner des parties dans le mode Classique.",
+        title: "Simple et efficace",
+        subtitle: "Gagnez des parties dans le mode Classique.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
       {
         id: "classic_expert",
-        title: "Expert du mode Classique",
-        subtitle: "Gagner des parties en 3 essais ou moins dans le mode Classique.",
+        title: "Analyste professionnel",
+        subtitle: "Gagnez des parties en 3 essais ou moins dans le mode Classique.",
         thresholds: [1, 3, 5, 8, 12, 20, 30, 45, 75, 100]
       },
       {
         id: "classic_god",
-        title: "Dieu du mode Classique",
-        subtitle: "Gagner des parties en 1 essai dans le mode Classique.",
+        title: "Coup de chance ?",
+        subtitle: "Gagnez des parties en 1 essai dans le mode Classique.",
         thresholds: [1, 2, 3, 4, 6, 8, 10, 12, 16, 20]
       },
       {
         id: "characteristics_enjoyer",
-        title: "Amateur du mode Caractéristiques",
-        subtitle: "Gagner des parties dans le mode Caractéristiques.",
+        title: "Connaître les bases",
+        subtitle: "Gagnez des parties dans le mode Caractéristiques.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "characteristics_streak",
+        title: "Maître des séries",
+        subtitle: "Gagnez des parties d'affilée dans le mode Caractéristiques.",
+        thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       },
       {
         id: "filter_enjoyer",
-        title: "Amateur du mode Filtrage",
-        subtitle: "Gagner des parties dans le mode Filtrage.",
+        title: "Œil d'aigle",
+        subtitle: "Gagnez des parties dans le mode Filtrage.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
       {
+        id: "filter_streak",
+        title: "Sans-faute",
+        subtitle: "Gagnez des parties d'affilée dans le mode Filtrage.",
+        thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
+      },
+      {
         id: "chronology_enjoyer",
-        title: "Amateur du mode Chronologie",
-        subtitle: "Gagner des parties dans le mode Chronologie.",
+        title: "Historien",
+        subtitle: "Gagnez des parties dans le mode Chronologie.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "chronology_streak",
+        title: "Créateur du flux temporel",
+        subtitle: "Gagnez des parties d'affilée dans le mode Chronologie.",
+        thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       }
     ]
 
