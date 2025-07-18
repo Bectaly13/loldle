@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 export type AchievementLevel =
-  | 'Bloqué' | 'Fer' | 'Bronze' | 'Argent' | 'Or'
-  | 'Platine' | 'Émeraude' | 'Diamant' | 'Maître'
-  | 'Grand-maître' | 'Challenger';
+  | "Bloqué" | "Fer" | "Bronze" | "Argent" | "Or"
+  | "Platine" | "Émeraude" | "Diamant" | "Maître"
+  | "Grand-maître" | "Challenger";
+
+type AchievementDefinition = Omit<Achievement, 'value' | 'unlocked' | 'level'>;
 
 export interface Achievement {
   id: string;
@@ -24,9 +26,9 @@ export class AchievementsService {
   private achievements: Achievement[] = [];
 
   levels: AchievementLevel[] = [
-    'Bloqué', 'Fer', 'Bronze', 'Argent', 'Or',
-    'Platine', 'Émeraude', 'Diamant', 'Maître',
-    'Grand-maître', 'Challenger'
+    "Bloqué", "Fer", "Bronze", "Argent", "Or",
+    "Platine", "Émeraude", "Diamant", "Maître",
+    "Grand-maître", "Challenger"
   ];
 
   constructor(private storage: StorageService) {
@@ -44,17 +46,37 @@ export class AchievementsService {
   }
 
   private getDefaultAchievements(): Achievement[] {
-    return [
+    const defs: AchievementDefinition[] = [
       {
-        id: 'classic_expert',
-        title: 'Expert du mode classique',
-        subtitle: 'Gagner une partie en 3 essais ou moins dans le mode Classique.',
-        value: 0,
-        unlocked: false,
-        thresholds: [1, 3, 5, 8, 12, 20, 30, 45, 75, 100],
-        level: 'Bloqué',
+        id: "classic_enjoyer",
+        title: "Amateur du mode Classique",
+        subtitle: "Gagner des parties dans le mode Classique.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "classic_expert",
+        title: "Expert du mode Classique",
+        subtitle: "Gagner des parties en 3 essais ou moins dans le mode Classique.",
+        thresholds: [1, 3, 5, 8, 12, 20, 30, 45, 75, 100]
+      },
+      {
+        id: "classic_god",
+        title: "Dieu du mode Classique",
+        subtitle: "Gagner des parties en 1 essai dans le mode Classique.",
+        thresholds: [1, 2, 3, 4, 6, 8, 10, 12, 16, 20]
       }
     ]
+
+    return defs.map(def => this.createAchievement(def));
+  }
+
+  private createAchievement(def: AchievementDefinition): Achievement {
+    return {
+      ...def,
+      value: 0,
+      unlocked: false,
+      level: 'Bloqué'
+    };
   }
 
   private mergeAchievements(defaults: Achievement[], stored: Achievement[]): Achievement[] {

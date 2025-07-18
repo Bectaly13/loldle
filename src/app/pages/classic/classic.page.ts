@@ -61,8 +61,14 @@ export class ClassicPage implements ViewWillEnter {
     this.storage.set("classic_history_data", this.history);
 
     if (champion.name === this.answer.name) {
+      this.ach.increment("classic_enjoyer");
+
       if(this.history.length <= 3) {
-        this.ach.increment("classic_expert")
+        this.ach.increment("classic_expert");
+
+        if(this.history.length == 1) {
+          this.ach.increment("classic_god");
+        }
       }
 
       this.won = true;
