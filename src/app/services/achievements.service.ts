@@ -83,6 +83,12 @@ export class AchievementsService {
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       },
       {
+        id: "characteristics_error",//
+        title: "À côté de la plaque",
+        subtitle: "Cochez uniquement les mauvaises réponses dans le mode Caractéristiques.",
+        thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
+      },
+      {
         id: "filter_enjoyer",
         title: "Œil d'aigle",
         subtitle: "Gagnez des parties dans le mode Filtrage.",
@@ -92,6 +98,12 @@ export class AchievementsService {
         id: "filter_streak",
         title: "Sans-faute",
         subtitle: "Gagnez des parties d'affilée dans le mode Filtrage.",
+        thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
+      },
+      {
+        id: "filter_error",//
+        title: "Erreur de parcours",
+        subtitle: "Cochez uniquement les mauvaises réponses dans le mode Filtrage.",
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       },
       {
@@ -105,7 +117,38 @@ export class AchievementsService {
         title: "Créateur du flux temporel",
         subtitle: "Gagnez des parties d'affilée dans le mode Chronologie.",
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
-      }
+      },
+      {
+        id: "marathonian",//
+        title: "Marathonien",
+        subtitle: "Jouez des parties tous modes confondus.",
+        thresholds: [10, 50, 100, 250, 500, 1000, 1500, 2500, 5000, 10000]
+      },
+      {
+        id: "winner",//
+        title: "Omniscient",
+        subtitle: "Gagnez des parties tous modes confondus.",
+        thresholds: [10, 50, 100, 250, 500, 750, 1000, 1500, 2000, 3000]
+      },
+      {
+        id: "addicted",//
+        title: "Addict",
+        subtitle: "Jouez plusieurs parties dans la même journée.",
+        thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
+      },
+      {
+        id: "unstoppable",//
+        title: "Innarêtable",
+        subtitle: "Gagnez plusieurs parties dans la même journée.",
+        thresholds: [5, 10, 20, 30, 50, 75, 100, 150, 200, 250]
+      },
+      {
+        id: "insomnia",//
+        title: "Insomniaque du Nexus",
+        subtitle: "Gagnez des parties entre 2h et 4h du matin.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+
     ]
 
     return defs.map(def => this.createAchievement(def));
