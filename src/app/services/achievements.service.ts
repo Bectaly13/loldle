@@ -191,7 +191,7 @@ export class AchievementsService {
       }
       
       const toast = await this.toast.create({
-        message: "Succès " + achievementState + ` ! ${achievement.title} est maintenant niveau ${achievement.level} !`,
+        message: "Succès " + achievementState + ` ! "${achievement.title}" est maintenant niveau ${achievement.level} !`,
         duration: 3000,
         position: "bottom",
         color: "light",
@@ -203,6 +203,27 @@ export class AchievementsService {
       await toast.onDidDismiss();
 
       this.processToastQueue();
+    }
+  }
+
+  updateValue(id: string, newValue: number) {
+  const ach = this.achievements.find(a => a.id === id);
+
+    if (ach && newValue > ach.value) {
+      const previousLevel = ach.level;
+
+      ach.value = newValue;
+      if (!ach.unlocked && ach.value >= 1) {
+        ach.unlocked = true;
+      }
+
+      ach.level = this.getAchievementLevel(ach.value, ach.thresholds);
+
+      if (ach.level !== previousLevel && this.levels.indexOf(ach.level) > this.levels.indexOf(previousLevel)) {
+        this.enqueueToast(ach);
+      }
+
+      this.storage.set("achievements_data", this.achievements);
     }
   }
 }

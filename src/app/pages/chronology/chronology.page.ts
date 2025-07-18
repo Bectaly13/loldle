@@ -75,7 +75,7 @@ export class ChronologyPage implements ViewWillEnter {
     }
   }
 
-  submit() {
+  async submit() {
     this.showResult = true;
 
     const years = this.choices.map(champ => champ.year);
@@ -84,6 +84,15 @@ export class ChronologyPage implements ViewWillEnter {
 
     if(this.won) {
       this.ach.increment("chronology_enjoyer");
+
+      let streak_data = await this.storage.get("chronology_streak_data") || 0;
+      streak_data++;
+      this.storage.set("chronology_streak_data", streak_data);
+
+      this.ach.updateValue("chronology_streak", streak_data);
+    }
+    else {
+      this.storage.set("chronology_streak_data", 0);
     }
 
     this.saveStats();

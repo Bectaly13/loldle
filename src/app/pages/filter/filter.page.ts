@@ -103,7 +103,7 @@ export class FilterPage implements ViewWillEnter {
     }
   }
 
-  submit() {
+  async submit() {
     this.showResult = true;
 
     const correctIndexes = this.choices.map((champ, i) => {
@@ -119,6 +119,15 @@ export class FilterPage implements ViewWillEnter {
 
     if(this.won) {
       this.ach.increment("filter_enjoyer");
+
+      let streak_data = await this.storage.get("filter_streak_data") || 0;
+      streak_data++;
+      this.storage.set("filter_streak_data", streak_data);
+
+      this.ach.updateValue("filter_streak", streak_data);
+    }
+    else {
+      this.storage.set("filter_streak_data", 0);
     }
 
     this.saveStats();

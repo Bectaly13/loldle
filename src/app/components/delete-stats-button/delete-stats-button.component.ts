@@ -24,7 +24,7 @@ export class DeleteStatsButtonComponent {
   async deleteStats() {
     const alert = await this.alert.create({
       header: "Supprimer vos données ?",
-      message: "Cette action est irréversible.",
+      message: "Cette action est irréversible. La suppression de vos statistiques ne supprimera pas votre progression pour les succès.",
       buttons: [
         {
           text: "Annuler",

@@ -114,7 +114,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     this.selectedChoices[index] = event.detail.checked;
   }
 
-  submit() {
+  async submit() {
     const selected = this.choices.filter((_, index) => this.selectedChoices[index]);
     selected.sort();
     const correct = [...this.answer].sort();
@@ -124,6 +124,15 @@ export class CharacteristicsPage implements ViewWillEnter {
 
     if(this.won) {
       this.ach.increment("characteristics_enjoyer");
+
+      let streak_data = await this.storage.get("characteristics_streak_data") || 0;
+      streak_data++;
+      this.storage.set("characteristics_streak_data", streak_data);
+
+      this.ach.updateValue("characteristics_streak", streak_data);
+    }
+    else {
+      this.storage.set("characteristics_streak_data", 0);
     }
 
     this.scrollToTop();
