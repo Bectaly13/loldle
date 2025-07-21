@@ -149,7 +149,7 @@ export class AchievementsService {
         thresholds: [5, 10, 20, 30, 50, 75, 100, 150, 200, 250]
       },
       {
-        id: "insomnia",//
+        id: "insomnia",
         title: "Insomniaque du Nexus",
         subtitle: "Gagnez des parties entre 2h et 4h du matin.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
