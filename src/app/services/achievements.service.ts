@@ -155,7 +155,7 @@ export class AchievementsService {
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
       {
-        id: "early_bird",//
+        id: "early_bird",
         title: "Lève-tôt",
         subtitle: "Gagnez une partie entre 5h et 7h du matin.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]

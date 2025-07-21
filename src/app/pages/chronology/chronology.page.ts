@@ -98,6 +98,9 @@ export class ChronologyPage implements ViewWillEnter {
       if (hour === 13) {
         this.ach.increment("coffee_break");
       }
+      if (hour >= 5 && hour < 7) {
+        this.ach.increment("early_bird");
+      }
     }
     else {
       this.storage.set("chronology_streak_data", 0);

@@ -79,6 +79,9 @@ export class ClassicPage implements ViewWillEnter {
       if (hour === 13) {
         this.ach.increment("coffee_break");
       }
+      if (hour >= 5 && hour < 7) {
+        this.ach.increment("early_bird");
+      }
 
       this.won = true;
       this.content.scrollToTop(500);
