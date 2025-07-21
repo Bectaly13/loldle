@@ -286,4 +286,31 @@ export class AchievementsService {
       this.storage.set("achievements_data", this.achievements);
     }
   }
+
+  async updateDailyStreak() {
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+
+    const lastDayStr = await this.storage.get("daily_streak_last_day");
+    let streak = await this.storage.get("daily_streak_count") || 0;
+
+    if (lastDayStr) {
+      const lastDay = new Date(lastDayStr);
+      const diff = (today.getTime() - lastDay.getTime()) / (1000 * 60 * 60 * 24);
+
+      if (diff === 1) {
+        streak++;
+      } else if (diff === 0) {
+      } else {
+        streak = 1;
+      }
+    } else {
+      streak = 1;
+    }
+
+    this.storage.set("daily_streak_last_day", todayStr);
+    this.storage.set("daily_streak_count", streak);
+
+    this.updateValue("daily_streak", streak);
+  }
 }

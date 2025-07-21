@@ -104,6 +104,8 @@ export class ChronologyPage implements ViewWillEnter {
       if (hour >= 2 && hour < 4) {
         this.ach.increment("insomnia");
       }
+
+      await this.ach.updateDailyStreak();
     }
     else {
       this.storage.set("chronology_streak_data", 0);

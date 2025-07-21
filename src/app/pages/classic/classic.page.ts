@@ -53,7 +53,7 @@ export class ClassicPage implements ViewWillEnter {
     }
   }
 
-  selectChampion(champion: Champion) {
+  async selectChampion(champion: Champion) {
     this.query = "";
     this.filteredChampions = [];
 
@@ -85,6 +85,8 @@ export class ClassicPage implements ViewWillEnter {
       if (hour >= 2 && hour < 4) {
         this.ach.increment("insomnia");
       }
+
+      await this.ach.updateDailyStreak();
 
       this.won = true;
       this.content.scrollToTop(500);

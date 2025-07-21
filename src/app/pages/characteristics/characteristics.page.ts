@@ -144,6 +144,8 @@ export class CharacteristicsPage implements ViewWillEnter {
       if (hour >= 2 && hour < 4) {
         this.ach.increment("insomnia");
       }
+
+      await this.ach.updateDailyStreak();
     }
     else {
       this.storage.set("characteristics_streak_data", 0);
