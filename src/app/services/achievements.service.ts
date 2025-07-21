@@ -131,16 +131,16 @@ export class AchievementsService {
         thresholds: [10, 50, 100, 250, 500, 750, 1000, 1500, 2000, 3000]
       },
       {
-        id: "addicted",//
-        title: "Addict",
-        subtitle: "Jouez plusieurs parties dans la même journée.",
-        thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
-      },
-      {
         id: "daily_streak",//
         title: "Habitué",
         subtitle: "Jouez plusieurs jours d'affilée sans interruption.",
         thresholds: [2, 3, 5, 7, 10, 15, 20, 30, 50, 100]
+      },
+      {
+        id: "addicted",//
+        title: "Addict",
+        subtitle: "Jouez plusieurs parties dans la même journée.",
+        thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
       },
       {
         id: "unstoppable",//
