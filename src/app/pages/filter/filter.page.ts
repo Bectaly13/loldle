@@ -141,6 +141,8 @@ export class FilterPage implements ViewWillEnter {
         this.ach.increment("filter_error");
       }
     }
+    
+    this.ach.increment("marathonian");
 
     this.saveStats();
     this.clearData();

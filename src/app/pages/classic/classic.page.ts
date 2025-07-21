@@ -71,6 +71,8 @@ export class ClassicPage implements ViewWillEnter {
         }
       }
 
+      this.ach.increment("marathonian");
+
       this.won = true;
       this.content.scrollToTop(500);
       this.saveStats();

@@ -119,7 +119,7 @@ export class AchievementsService {
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       },
       {
-        id: "marathonian",//
+        id: "marathonian",
         title: "Marathonien",
         subtitle: "Jouez des parties tous modes confondus.",
         thresholds: [10, 50, 100, 250, 500, 1000, 1500, 2500, 5000, 10000]

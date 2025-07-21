@@ -95,6 +95,8 @@ export class ChronologyPage implements ViewWillEnter {
       this.storage.set("chronology_streak_data", 0);
     }
 
+    this.ach.increment("marathonian");
+
     this.saveStats();
     this.clearData();
   }
