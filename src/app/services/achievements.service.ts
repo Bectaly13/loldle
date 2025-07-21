@@ -273,7 +273,7 @@ export class AchievementsService {
       const previousLevel = ach.level;
 
       ach.value = newValue;
-      if (!ach.unlocked && ach.value >= 1) {
+      if (!ach.unlocked && ach.value >= ach.thresholds[0]) {
         ach.unlocked = true;
       }
 
