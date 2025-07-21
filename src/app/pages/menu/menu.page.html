@@ -2,7 +2,7 @@
 
   <div class="background-grid">
     @for(champion of championNames ; track $index) {
-      <img [src]="'assets/champion-icons/' + champion + '.png'" class="champion-icon"/>
+      <img loading="lazy" [src]="'assets/champion-icons/' + champion + '.png'" class="champion-icon"/>
     }    
   </div>
 
