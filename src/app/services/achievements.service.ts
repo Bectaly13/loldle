@@ -157,13 +157,13 @@ export class AchievementsService {
       {
         id: "early_bird",
         title: "Lève-tôt",
-        subtitle: "Gagnez une partie entre 5h et 7h du matin.",
+        subtitle: "Gagnez des parties entre 5h et 7h du matin.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
       {
         id: "coffee_break",
         title: "Pause café",
-        subtitle: "Gagnez une partie entre 13h et 14h.",
+        subtitle: "Gagnez des parties entre 13h et 14h.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       }
     ]
