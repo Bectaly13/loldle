@@ -96,6 +96,7 @@ export class ChronologyPage implements ViewWillEnter {
       this.ach.checkTime();
 
       await this.ach.updateDailyStreak();
+      await this.ach.updateDailyWinCount();
     }
     else {
       this.storage.set("chronology_streak_data", 0);

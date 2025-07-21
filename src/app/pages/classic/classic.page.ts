@@ -77,8 +77,8 @@ export class ClassicPage implements ViewWillEnter {
       this.ach.checkTime();
 
       await this.ach.updateDailyStreak();
-
       await this.ach.updateDailyPlayCount();
+      await this.ach.updateDailyWinCount();
 
       this.won = true;
       this.content.scrollToTop(500);

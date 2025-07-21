@@ -143,7 +143,7 @@ export class AchievementsService {
         thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
       },
       {
-        id: "unstoppable",//
+        id: "unstoppable",
         title: "Innarêtable",
         subtitle: "Gagnez plusieurs parties dans la même journée.",
         thresholds: [5, 10, 20, 30, 50, 75, 100, 150, 200, 250]
@@ -342,5 +342,21 @@ export class AchievementsService {
 
     await this.storage.set("daily_play_count", count);
     this.updateValue("addicted", count);
+  }
+
+  async updateDailyWinCount() {
+    const today = new Date().toISOString().slice(0, 10);
+    const lastDay = await this.storage.get("daily_win_date");
+    let count = await this.storage.get("daily_win_count") || 0;
+
+    if (lastDay === today) {
+      count++;
+    } else {
+      count = 1;
+      await this.storage.set("daily_win_date", today);
+    }
+
+    await this.storage.set("daily_win_count", count);
+    this.updateValue("unstoppable", count);
   }
 }

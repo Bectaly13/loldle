@@ -131,6 +131,7 @@ export class FilterPage implements ViewWillEnter {
       this.ach.checkTime();
 
       await this.ach.updateDailyStreak();
+      await this.ach.updateDailyWinCount();
     }
     else {
       this.storage.set("filter_streak_data", 0);
