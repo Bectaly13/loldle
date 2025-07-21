@@ -127,6 +127,12 @@ export class FilterPage implements ViewWillEnter {
       this.ach.updateValue("filter_streak", streak_data);
 
       this.ach.increment("winner");
+
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour === 13) {
+        this.ach.increment("coffee_break");
+      }
     }
     else {
       this.storage.set("filter_streak_data", 0);

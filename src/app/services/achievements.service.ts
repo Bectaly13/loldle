@@ -161,7 +161,7 @@ export class AchievementsService {
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
       {
-        id: "coffee_break",//
+        id: "coffee_break",
         title: "Pause café",
         subtitle: "Gagnez une partie entre 13h et 14h.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]

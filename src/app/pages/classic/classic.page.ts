@@ -74,6 +74,12 @@ export class ClassicPage implements ViewWillEnter {
       this.ach.increment("marathonian");
       this.ach.increment("winner");
 
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour === 13) {
+        this.ach.increment("coffee_break");
+      }
+
       this.won = true;
       this.content.scrollToTop(500);
       this.saveStats();

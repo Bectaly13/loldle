@@ -92,6 +92,12 @@ export class ChronologyPage implements ViewWillEnter {
       this.ach.updateValue("chronology_streak", streak_data);
 
       this.ach.increment("winner");
+
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour === 13) {
+        this.ach.increment("coffee_break");
+      }
     }
     else {
       this.storage.set("chronology_streak_data", 0);

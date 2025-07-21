@@ -132,6 +132,12 @@ export class CharacteristicsPage implements ViewWillEnter {
       this.ach.updateValue("characteristics_streak", streak_data);
 
       this.ach.increment("winner");
+
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour === 13) {
+        this.ach.increment("coffee_break");
+      }
     }
     else {
       this.storage.set("characteristics_streak_data", 0);
