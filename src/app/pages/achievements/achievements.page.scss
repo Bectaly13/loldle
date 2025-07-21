@@ -35,9 +35,12 @@
   }
 
   .achievement-list {
+    padding-top: 0px;
+    padding-bottom: 0px;
+
     ion-item.achievement-item {
       --padding-start: 16px;
-      --inner-padding-end: 8px;
+      --padding-end: 16px;
 
       .achievement-content {
         display: flex;

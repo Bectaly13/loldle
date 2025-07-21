@@ -197,7 +197,13 @@ export class AchievementsService {
 
   getAchievementLevel(value: number, thresholds: number[]): AchievementLevel {
     const index = thresholds.findIndex(threshold => value < threshold);
-    return this.levels[Math.max(0, index)];
+
+    if(index === -1) {
+      return this.levels[this.levels.length - 1];
+    }
+    else {
+      return this.levels[index];
+    }
   }
 
   increment(id: string) {
