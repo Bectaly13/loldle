@@ -40,6 +40,8 @@ export class FilterPage implements ViewWillEnter {
               private ach: AchievementsService) { }
 
   ionViewWillEnter(): void {
+    this.ach.init();
+    
     this.getChampionsData();
 
     this.startGame();

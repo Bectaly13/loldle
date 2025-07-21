@@ -262,7 +262,9 @@ export class AchievementsService {
         position: "bottom",
         color: "light",
         keyboardClose: true,
-        swipeGesture: "vertical"
+        swipeGesture: "vertical",
+        animated: true,
+        cssClass: "custom-toast"
       });
 
       await toast.present();

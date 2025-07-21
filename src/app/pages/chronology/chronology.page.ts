@@ -31,6 +31,8 @@ export class ChronologyPage implements ViewWillEnter {
               private ach: AchievementsService) { }
 
   ionViewWillEnter(): void {
+    this.ach.init();
+    
     this.getChampionsData();
 
     this.startGame();    
