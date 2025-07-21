@@ -133,6 +133,18 @@ export class CharacteristicsPage implements ViewWillEnter {
     }
     else {
       this.storage.set("characteristics_streak_data", 0);
+
+      const selected = this.choices.filter((_, index) => this.selectedChoices[index]);
+      const wrongChoices = this.choices.filter(choice => !this.answer.includes(choice));
+
+      const selectedSorted = [...selected].sort();
+      const wrongSorted = [...wrongChoices].sort();
+      const isExactlyWrong = selectedSorted.length === wrongSorted.length &&
+                            selectedSorted.every((val, i) => val === wrongSorted[i]);
+
+      if (isExactlyWrong) {
+        this.ach.increment("characteristics_error");
+      }
     }
 
     this.scrollToTop();
