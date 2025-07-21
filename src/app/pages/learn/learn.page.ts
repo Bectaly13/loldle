@@ -7,11 +7,6 @@ import { ChampionsService, Champion } from 'src/app/services/champions.service';
 
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
-export interface Category {
-  name: string;
-  displayName: string;
-}
-
 @Component({
   selector: 'app-learn',
   templateUrl: './learn.page.html',
