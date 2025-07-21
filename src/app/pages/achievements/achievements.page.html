@@ -2,20 +2,22 @@
 
   <app-navbar title="Mes succès"/>
 
-  <ion-card class="summary-class">
+  <ion-card class="summary-card">
     <ion-card-header>
       <ion-card-title>Statistiques des succès</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <div class="stat-line">
-        <p><strong>Succès débloqués :</strong> {{countUnlocked()}} / {{totalAchievements()}} ({{unlockedPercentage()}}%)</p>
-        <ion-progress-bar [value]="unlockedPercentage() / 100"></ion-progress-bar>
-      </div>
+      <div class="stat-lines">
+        <div class="stat-line">
+          <p><strong>Succès débloqués :</strong> {{countUnlocked()}} / {{totalAchievements()}} ({{unlockedPercentage()}}%)</p>
+          <ion-progress-bar [value]="unlockedPercentage() / 100"></ion-progress-bar>
+        </div>
 
-      <div class="stat-line">
-        <p><strong>Progression :</strong> {{totalLevelScore()}} / {{maxLevelScore()}} ({{levelProgressionPercentage()}}%)</p>
-        <ion-progress-bar [value]="levelProgressionPercentage() / 100"></ion-progress-bar>
+        <div class="stat-line">
+          <p><strong>Progression :</strong> {{totalLevelScore()}} / {{maxLevelScore()}} ({{levelProgressionPercentage()}}%)</p>
+          <ion-progress-bar [value]="levelProgressionPercentage() / 100"></ion-progress-bar>
+        </div>
       </div>
 
       @for(level of levels ; track $index) {
