@@ -128,17 +128,7 @@ export class FilterPage implements ViewWillEnter {
 
       this.ach.increment("winner");
 
-      const now = new Date();
-      const hour = now.getHours();
-      if (hour === 13) {
-        this.ach.increment("coffee_break");
-      }
-      if (hour >= 5 && hour < 7) {
-        this.ach.increment("early_bird");
-      }
-      if (hour >= 2 && hour < 4) {
-        this.ach.increment("insomnia");
-      }
+      this.ach.checkTime();
 
       await this.ach.updateDailyStreak();
     }

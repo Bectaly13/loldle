@@ -131,7 +131,7 @@ export class AchievementsService {
         thresholds: [10, 50, 100, 250, 500, 750, 1000, 1500, 2000, 3000]
       },
       {
-        id: "daily_streak",//
+        id: "daily_streak",
         title: "Habitué",
         subtitle: "Jouez plusieurs jours d'affilée sans interruption.",
         thresholds: [2, 3, 5, 7, 10, 15, 20, 30, 50, 100]
@@ -284,6 +284,20 @@ export class AchievementsService {
       }
 
       this.storage.set("achievements_data", this.achievements);
+    }
+  }
+
+  checkTime() {
+    const now = new Date();
+    const hour = now.getHours();
+    if (hour === 13) {
+      this.increment("coffee_break");
+    }
+    if (hour >= 5 && hour < 7) {
+      this.increment("early_bird");
+    }
+    if (hour >= 2 && hour < 4) {
+      this.increment("insomnia");
     }
   }
 
