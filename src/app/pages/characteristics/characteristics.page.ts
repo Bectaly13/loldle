@@ -130,6 +130,8 @@ export class CharacteristicsPage implements ViewWillEnter {
       this.storage.set("characteristics_streak_data", streak_data);
 
       this.ach.updateValue("characteristics_streak", streak_data);
+
+      this.ach.increment("winner");
     }
     else {
       this.storage.set("characteristics_streak_data", 0);

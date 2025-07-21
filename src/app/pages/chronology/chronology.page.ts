@@ -90,6 +90,8 @@ export class ChronologyPage implements ViewWillEnter {
       this.storage.set("chronology_streak_data", streak_data);
 
       this.ach.updateValue("chronology_streak", streak_data);
+
+      this.ach.increment("winner");
     }
     else {
       this.storage.set("chronology_streak_data", 0);

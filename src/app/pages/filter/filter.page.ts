@@ -125,6 +125,8 @@ export class FilterPage implements ViewWillEnter {
       this.storage.set("filter_streak_data", streak_data);
 
       this.ach.updateValue("filter_streak", streak_data);
+
+      this.ach.increment("winner");
     }
     else {
       this.storage.set("filter_streak_data", 0);

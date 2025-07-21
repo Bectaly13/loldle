@@ -125,7 +125,7 @@ export class AchievementsService {
         thresholds: [10, 50, 100, 250, 500, 1000, 1500, 2500, 5000, 10000]
       },
       {
-        id: "winner",//
+        id: "winner",
         title: "Omniscient",
         subtitle: "Gagnez des parties tous modes confondus.",
         thresholds: [10, 50, 100, 250, 500, 750, 1000, 1500, 2000, 3000]
@@ -208,7 +208,7 @@ export class AchievementsService {
 
       ach.value += 1;
 
-      if (!ach.unlocked && ach.value >= 1) {
+      if (!ach.unlocked && ach.value >= ach.thresholds[0]) {
         ach.unlocked = true;
       }
 
