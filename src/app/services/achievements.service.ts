@@ -83,7 +83,7 @@ export class AchievementsService {
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
       },
       {
-        id: "characteristics_error",//
+        id: "characteristics_error",
         title: "À côté de la plaque",
         subtitle: "Cochez uniquement les mauvaises réponses dans le mode Caractéristiques.",
         thresholds: [2, 3, 5, 8, 12, 18, 25, 35, 50, 100]
