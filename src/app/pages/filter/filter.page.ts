@@ -128,6 +128,18 @@ export class FilterPage implements ViewWillEnter {
     }
     else {
       this.storage.set("filter_streak_data", 0);
+
+      const selected = this.selectedChoices;
+      const correct = this.correctIndexes;
+
+      const allCorrectUnselected = correct.every((isCorrect, i) => !isCorrect || !selected[i]);
+      const allWrongSelected = correct.every((isCorrect, i) => isCorrect || selected[i]);
+      
+      const isExactlyWrong = allCorrectUnselected && allWrongSelected;
+
+      if (isExactlyWrong) {
+        this.ach.increment("filter_error");
+      }
     }
 
     this.saveStats();
