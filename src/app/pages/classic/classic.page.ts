@@ -172,14 +172,7 @@ export class ClassicPage implements ViewWillEnter {
   }
 
   async saveStats() {
-    let gameState: string = "";
-
-    if(this.won) {
-      gameState = "Gagné";
-    }
-    else {
-      gameState = "Abandonné";
-    }
+    let gameState: string = this.won ? "Gagné" : "Perdu";
 
     let stat: any = {
       gameState: gameState,
@@ -190,7 +183,19 @@ export class ClassicPage implements ViewWillEnter {
 
     let classic_stats_data = await this.storage.get("classic_stats_data") || [];
     classic_stats_data.push(stat);
+    if (classic_stats_data.length > 20) {
+      classic_stats_data = classic_stats_data.slice(-20);
+    }
     this.storage.set("classic_stats_data", classic_stats_data);
+
+    let classic_data = await this.storage.get("classic_data") || {won: 0, abandoned: 0}
+    if(this.won) {
+      classic_data = {won: classic_data["won"] + 1, abandoned: classic_data["abandoned"]};
+    }
+    else {
+      classic_data = {won: classic_data["won"], abandoned: classic_data["abandoned"] + 1};
+    }
+    this.storage.set("classic_data", classic_data);
   }
 
   clearData() {

@@ -111,14 +111,7 @@ export class ChronologyPage implements ViewWillEnter {
   }
 
   async saveStats() {
-    let gameState: string = "";
-
-    if(this.won) {
-      gameState = "Gagné";
-    }
-    else {
-      gameState = "Perdu";
-    }
+    let gameState: string = this.won ? "Gagné" : "Perdu";
 
     let stat: any = {
       gameState: gameState,
@@ -129,7 +122,19 @@ export class ChronologyPage implements ViewWillEnter {
 
     let chronology_stats_data = await this.storage.get("chronology_stats_data") || [];
     chronology_stats_data.push(stat);
+    if (chronology_stats_data.length > 20) {
+      chronology_stats_data = chronology_stats_data.slice(-20);
+    }
     this.storage.set("chronology_stats_data", chronology_stats_data);
+
+    let chronology_data = await this.storage.get("chronology_data") || {won: 0, lost: 0}
+    if(this.won) {
+      chronology_data = {won: chronology_data["won"] + 1, lost: chronology_data["lost"]};
+    }
+    else {
+      chronology_data = {won: chronology_data["won"], lost: chronology_data["lost"] + 1};
+    }
+    this.storage.set("chronology_data", chronology_data);
   }
 
   formatDate(date: Date): string {

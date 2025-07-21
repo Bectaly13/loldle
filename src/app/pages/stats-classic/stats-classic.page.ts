@@ -17,10 +17,10 @@ import { DeleteStatsButtonComponent } from 'src/app/components/delete-stats-butt
 })
 export class StatsClassicPage implements ViewWillEnter {
   stats: any[] = [];
+  data!: any;
   wonCount = 0;
   abandonedCount = 0;
   totalCount = 0;
-  averageTries: string = "-";
 
   constructor(private storage: StorageService) { }
 
@@ -30,15 +30,10 @@ export class StatsClassicPage implements ViewWillEnter {
 
   async getStats() {
     this.stats = await this.storage.get("classic_stats_data") || [];
-
-    this.totalCount = this.stats.length;
-    const wonGames = this.stats.filter(stat => stat.gameState === "Gagné");
-    this.wonCount = wonGames.length;
-    this.abandonedCount = this.totalCount - this.wonCount;
+    this.data = await this.storage.get("classic_data") || {won: 0, abandoned: 0};
     
-    if (wonGames.length > 0) {
-      const totalTries = wonGames.reduce((acc, stat) => acc + stat.tries, 0);
-      this.averageTries = (totalTries / wonGames.length).toFixed(2);
-    }
+    this.totalCount = this.data["won"] + this.data["abandoned"];
+    this.wonCount = this.data["won"];
+    this.abandonedCount = this.data["abandoned"];
   }
 }

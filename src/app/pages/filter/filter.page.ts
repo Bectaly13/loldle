@@ -179,14 +179,7 @@ export class FilterPage implements ViewWillEnter {
   }
 
   async saveStats() {
-    let gameState: string = "";
-
-    if(this.won) {
-      gameState = "Gagné";
-    }
-    else {
-      gameState = "Perdu";
-    }
+    let gameState: string = this.won ? "Gagné" : "Perdu";
 
     let attributeStats: string = "";
 
@@ -220,7 +213,19 @@ export class FilterPage implements ViewWillEnter {
 
     let filter_stats_data = await this.storage.get("filter_stats_data") || [];
     filter_stats_data.push(stat);
+    if (filter_stats_data.length > 20) {
+      filter_stats_data = filter_stats_data.slice(-20);
+    }
     this.storage.set("filter_stats_data", filter_stats_data);
+
+    let filter_data = await this.storage.get("filter_data") || {won: 0, lost: 0}
+    if(this.won) {
+      filter_data = {won: filter_data["won"] + 1, lost: filter_data["lost"]};
+    }
+    else {
+      filter_data = {won: filter_data["won"], lost: filter_data["lost"] + 1};
+    }
+    this.storage.set("filter_data", filter_data);
   }
 
   formatDate(date: Date): string {

@@ -169,14 +169,7 @@ export class CharacteristicsPage implements ViewWillEnter {
   }
 
   async saveStats() {
-    let gameState: string = "";
-
-    if(this.won) {
-      gameState = "Gagné";
-    }
-    else {
-      gameState = "Perdu";
-    }
+    let gameState: string = this.won ? "Gagné" : "Perdu";
 
     let user_answer: string[] = [];
 
@@ -205,7 +198,19 @@ export class CharacteristicsPage implements ViewWillEnter {
 
     let characteristics_stats_data = await this.storage.get("characteristics_stats_data") || [];
     characteristics_stats_data.push(stat);
+    if (characteristics_stats_data.length > 20) {
+      characteristics_stats_data = characteristics_stats_data.slice(-20);
+    }
     this.storage.set("characteristics_stats_data", characteristics_stats_data);
+
+    let characteristics_data = await this.storage.get("characteristics_data") || {won: 0, lost: 0}
+    if(this.won) {
+      characteristics_data = {won: characteristics_data["won"] + 1, lost: characteristics_data["lost"]};
+    }
+    else {
+      characteristics_data = {won: characteristics_data["won"], lost: characteristics_data["lost"] + 1};
+    }
+    this.storage.set("characteristics_data", characteristics_data);
   }
 
   formatDate(date: Date): string {
