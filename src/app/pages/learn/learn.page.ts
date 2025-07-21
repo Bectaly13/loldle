@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, ViewWillEnter, IonButton, IonItem, IonLabel, IonList, IonCard, IonCardContent} from '@ionic/angular/standalone';
+import { IonContent, ViewWillEnter, IonButton, IonItem, IonLabel, IonList, IonCard, IonCardContent } from '@ionic/angular/standalone';
 
 import { ChampionsService, Champion } from 'src/app/services/champions.service';
 
