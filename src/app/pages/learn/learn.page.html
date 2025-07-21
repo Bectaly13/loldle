@@ -1,11 +1,11 @@
-<ion-content [fullscreen]="true" class="learn-content">
+<ion-content [fullscreen]="true" class="learn-content" scrollEvents="true" (ionScroll)="onScroll()" #contentRef>
 
   <app-navbar title="Apprendre" />
 
   <p class="instruction">Sélectionnez un champion pour voir ses attributs.</p>
 
   <ion-list>
-    @for(champion of champions ; track $index) {
+    @for(champion of loadedChampions ; track $index) {
       <ion-item (click)="selectChampion(champion)">
         <img loading="lazy" class="champion-icon" [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start"/>
         <ion-label>{{champion.name}}</ion-label>
