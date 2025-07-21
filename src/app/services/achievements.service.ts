@@ -137,6 +137,12 @@ export class AchievementsService {
         thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
       },
       {
+        id: "daily_streak",//
+        title: "Habitué",
+        subtitle: "Jouez plusieurs jours d'affilée sans interruption.",
+        thresholds: [2, 3, 5, 7, 10, 15, 20, 30, 50, 100]
+      },
+      {
         id: "unstoppable",//
         title: "Innarêtable",
         subtitle: "Gagnez plusieurs parties dans la même journée.",
@@ -148,7 +154,18 @@ export class AchievementsService {
         subtitle: "Gagnez des parties entre 2h et 4h du matin.",
         thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
       },
-
+      {
+        id: "early_bird",//
+        title: "Lève-tôt",
+        subtitle: "Gagnez une partie entre 5h et 7h du matin.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      },
+      {
+        id: "coffee_break",//
+        title: "Pause café",
+        subtitle: "Gagnez une partie entre 13h et 14h.",
+        thresholds: [1, 5, 10, 15, 20, 40, 75, 100, 150, 300]
+      }
     ]
 
     return defs.map(def => this.createAchievement(def));
