@@ -1,0 +1,54 @@
+.achievements-page {
+  ion-card.summary-card {
+    margin: 16px;
+
+    .stat-line {
+      margin-bottom: 16px;
+
+      p {
+        margin: 0 0 6px 0;
+        font-size: 14px;
+      }
+
+      ion-progress-bar {
+        height: 10px;
+        border-radius: 6px;
+      }
+    }
+
+    .level-count {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+
+  .achievement-list {
+    ion-item.achievement-item {
+      --padding-start: 16px;
+      --inner-padding-end: 8px;
+
+      .achievement-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .achievement-text {
+          max-width: 80%;
+        }
+
+        .achievement-icon {
+          height: 40px;
+          width: 40px;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}

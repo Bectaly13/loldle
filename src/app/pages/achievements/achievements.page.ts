@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, ViewWillEnter, IonList, IonItem, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, ViewWillEnter, IonList, IonItem, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar } from '@ionic/angular/standalone';
 
 import { AchievementsService, Achievement, AchievementLevel } from 'src/app/services/achievements.service';
 
@@ -12,7 +12,7 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
   templateUrl: './achievements.page.html',
   styleUrls: ['./achievements.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, NavbarComponent, IonList, IonItem, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
+  imports: [IonContent, CommonModule, FormsModule, NavbarComponent, IonList, IonItem, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar]
 })
 export class AchievementsPage implements ViewWillEnter {
   achievements: Achievement[] = [];
