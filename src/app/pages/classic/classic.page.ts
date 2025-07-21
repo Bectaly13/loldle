@@ -35,9 +35,9 @@ export class ClassicPage implements ViewWillEnter {
               private storage: StorageService,
               private ach: AchievementsService) { }
 
-  ionViewWillEnter(): void {
+  async ionViewWillEnter(): Promise<void> {
     this.ach.init();
-    
+
     this.getChampionsData();
     
     this.startGame();
