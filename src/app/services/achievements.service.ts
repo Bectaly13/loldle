@@ -137,7 +137,7 @@ export class AchievementsService {
         thresholds: [2, 3, 5, 7, 10, 15, 20, 30, 50, 100]
       },
       {
-        id: "addicted",//
+        id: "addicted",
         title: "Addict",
         subtitle: "Jouez plusieurs parties dans la même journée.",
         thresholds: [5, 10, 20, 50, 100, 150, 200, 250, 350, 500]
@@ -326,5 +326,21 @@ export class AchievementsService {
     this.storage.set("daily_streak_count", streak);
 
     this.updateValue("daily_streak", streak);
+  }
+
+  async updateDailyPlayCount() {
+    const today = new Date().toISOString().slice(0, 10);
+    const lastDay = await this.storage.get("daily_play_date");
+    let count = await this.storage.get("daily_play_count") || 0;
+
+    if (lastDay === today) {
+      count++;
+    } else {
+      count = 1;
+      await this.storage.set("daily_play_date", today);
+    }
+
+    await this.storage.set("daily_play_count", count);
+    this.updateValue("addicted", count);
   }
 }

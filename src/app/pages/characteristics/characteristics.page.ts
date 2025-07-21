@@ -155,6 +155,8 @@ export class CharacteristicsPage implements ViewWillEnter {
 
     this.ach.increment("marathonian");
 
+    await this.ach.updateDailyPlayCount();
+
     this.scrollToTop();
 
     this.saveStats();

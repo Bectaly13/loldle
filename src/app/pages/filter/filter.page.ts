@@ -150,6 +150,8 @@ export class FilterPage implements ViewWillEnter {
     
     this.ach.increment("marathonian");
 
+    await this.ach.updateDailyPlayCount();
+
     this.saveStats();
     this.clearData();
   }

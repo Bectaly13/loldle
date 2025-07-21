@@ -103,6 +103,8 @@ export class ChronologyPage implements ViewWillEnter {
 
     this.ach.increment("marathonian");
 
+    await this.ach.updateDailyPlayCount();
+
     this.saveStats();
     this.clearData();
   }
