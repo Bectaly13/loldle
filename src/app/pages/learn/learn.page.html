@@ -7,7 +7,7 @@
   <ion-list>
     @for(champion of champions ; track $index) {
       <ion-item (click)="selectChampion(champion)">
-        <img class="champion-icon" [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start"/>
+        <img loading="lazy" class="champion-icon" [src]="'assets/champion-icons/' + champion.name + '.png'" slot="start"/>
         <ion-label>{{champion.name}}</ion-label>
       </ion-item>
 
