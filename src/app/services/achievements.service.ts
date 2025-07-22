@@ -244,33 +244,35 @@ export class AchievementsService {
       return;
     }
 
-    this.isShowingToast = true;
-    const achievement = this.toastQueue.shift();
+    else {
+      this.isShowingToast = true;
+      const achievement = this.toastQueue.shift();
 
-    if (achievement) {
-      let achievementState: string = "";
-      if(achievement.level == "Fer") {
-        achievementState = "débloqué";
+      if (achievement) {
+        let achievementState: string = "";
+        if(achievement.level === "Fer") {
+          achievementState = "débloqué";
+        }
+        else {
+          achievementState = "amélioré";
+        }
+        
+        const toast = await this.toast.create({
+          message: "Succès " + achievementState + ` ! "${achievement.title}" est maintenant niveau ${achievement.level} !`,
+          duration: 3000,
+          position: "bottom",
+          color: "light",
+          keyboardClose: true,
+          swipeGesture: "vertical",
+          animated: true,
+          cssClass: "custom-toast"
+        });
+
+        await toast.present();
+        await toast.onDidDismiss();
+
+        this.processToastQueue();
       }
-      else {
-        achievementState = "amélioré";
-      }
-      
-      const toast = await this.toast.create({
-        message: "Succès " + achievementState + ` ! "${achievement.title}" est maintenant niveau ${achievement.level} !`,
-        duration: 3000,
-        position: "bottom",
-        color: "light",
-        keyboardClose: true,
-        swipeGesture: "vertical",
-        animated: true,
-        cssClass: "custom-toast"
-      });
-
-      await toast.present();
-      await toast.onDidDismiss();
-
-      this.processToastQueue();
     }
   }
 
