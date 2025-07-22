@@ -21,8 +21,8 @@ export class AchievementsPage implements ViewWillEnter {
 
   constructor(private ach: AchievementsService) { }
   
-  ionViewWillEnter(): void {
-    this.ach.init();
+  async ionViewWillEnter(): Promise<void> {
+    await this.ach.init();
     this.achievements = this.ach.getAllAchievements();
     this.levels = this.ach.levels;
   }
