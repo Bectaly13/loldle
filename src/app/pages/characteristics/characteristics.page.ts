@@ -46,7 +46,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     
     this.getChampionsData();
 
-    this.startGame();
+    await this.startGame();
   }
 
   getChampionsData() {
@@ -58,7 +58,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     const champion_data = await this.storage.get("characteristics_champion_data");
 
     if(!champion_data) {
-      this.resetGame();
+      await this.resetGame();
     }
 
     else {
@@ -74,21 +74,25 @@ export class CharacteristicsPage implements ViewWillEnter {
     }
   }
 
-  resetGame() {
+  async resetGame() {
+    this.selectedChoices = new Array(this.choices.length).fill(false);
+    this.showResult = false;
+    this.won = false;
+    
     const index: number = Math.floor(Math.random() * this.n);
     this.champion = this.champions[index];
-    this.storage.set("characteristics_champion_data", this.champion);
+    await this.storage.set("characteristics_champion_data", this.champion);
 
     const randomIndex = Math.floor(Math.random() * this.possibleAttributes.length);
     this.attribute = this.possibleAttributes[randomIndex];
-    this.storage.set("characteristics_attribute_data", this.attribute);
+    await this.storage.set("characteristics_attribute_data", this.attribute);
 
     this.attributeDisplay = this.possibleAttributesDisplay[randomIndex];
-    this.storage.set("characteristics_attribute_display_data", this.attributeDisplay);
+    await this.storage.set("characteristics_attribute_display_data", this.attributeDisplay);
 
     const rawAnswer = (this.champion as any)[this.attribute];
     this.answer = Array.isArray(rawAnswer) ? rawAnswer : [rawAnswer];
-    this.storage.set("characteristics_answer_data", this.answer);
+    await this.storage.set("characteristics_answer_data", this.answer);
 
     const rawValues = this.champions.map(c => (c as any)[this.attribute]);
     const flattened = rawValues.reduce((acc: string[], val: any) => {
@@ -101,11 +105,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     this.choices = [...new Set(flattened)].sort((a, b) =>
       a.localeCompare(b, "fr", {sensitivity: "base"})
     );
-    this.storage.set("characteristics_choices_data", this.choices);
-
-    this.selectedChoices = new Array(this.choices.length).fill(false);
-    this.showResult = false;
-    this.won = false;
+    await this.storage.set("characteristics_choices_data", this.choices);
   }
 
   toggleCheckbox(index: number) {
@@ -129,7 +129,7 @@ export class CharacteristicsPage implements ViewWillEnter {
 
       let streak_data = await this.storage.get("characteristics_streak_data") || 0;
       streak_data++;
-      this.storage.set("characteristics_streak_data", streak_data);
+      await this.storage.set("characteristics_streak_data", streak_data);
 
       this.ach.updateValue("characteristics_streak", streak_data);
 
@@ -162,7 +162,7 @@ export class CharacteristicsPage implements ViewWillEnter {
 
     this.scrollToTop();
 
-    this.saveStats();
+    await this.saveStats();
     this.clearData();
   }
 
@@ -203,7 +203,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     if (characteristics_stats_data.length > 20) {
       characteristics_stats_data = characteristics_stats_data.slice(-20);
     }
-    this.storage.set("characteristics_stats_data", characteristics_stats_data);
+    await this.storage.set("characteristics_stats_data", characteristics_stats_data);
 
     let characteristics_data = await this.storage.get("characteristics_data") || {won: 0, lost: 0}
     if(this.won) {
@@ -212,7 +212,7 @@ export class CharacteristicsPage implements ViewWillEnter {
     else {
       characteristics_data = {won: characteristics_data["won"], lost: characteristics_data["lost"] + 1};
     }
-    this.storage.set("characteristics_data", characteristics_data);
+    await this.storage.set("characteristics_data", characteristics_data);
   }
 
   formatDate(date: Date): string {

@@ -35,7 +35,7 @@ export class ChronologyPage implements ViewWillEnter {
     
     this.getChampionsData();
 
-    this.startGame();    
+    await this.startGame();    
   }
 
   getChampionsData() {
@@ -47,7 +47,7 @@ export class ChronologyPage implements ViewWillEnter {
     const choices_data = await this.storage.get("chronology_choices_data");
 
     if(!choices_data) {
-      this.resetGame();
+      await this.resetGame();
     }
 
     else {
@@ -55,14 +55,14 @@ export class ChronologyPage implements ViewWillEnter {
     }
   }
 
-  resetGame() {
-    const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
-    this.choices = shuffledChampions.slice(0, 3);
-    this.storage.set("chronology_choices_data", this.choices);
-
+  async resetGame() {
     this.slots = Array(this.choices.length).fill(null);
     this.showResult = false;
     this.won = false;
+    
+    const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
+    this.choices = shuffledChampions.slice(0, 3);
+    await this.storage.set("chronology_choices_data", this.choices);
   }
 
   moveLeft(index: number) {
@@ -89,7 +89,7 @@ export class ChronologyPage implements ViewWillEnter {
 
       let streak_data = await this.storage.get("chronology_streak_data") || 0;
       streak_data++;
-      this.storage.set("chronology_streak_data", streak_data);
+      await this.storage.set("chronology_streak_data", streak_data);
 
       this.ach.updateValue("chronology_streak", streak_data);
 
@@ -101,14 +101,14 @@ export class ChronologyPage implements ViewWillEnter {
       await this.ach.updateDailyWinCount();
     }
     else {
-      this.storage.set("chronology_streak_data", 0);
+      await this.storage.set("chronology_streak_data", 0);
     }
 
     this.ach.increment("marathonian");
 
     await this.ach.updateDailyPlayCount();
 
-    this.saveStats();
+    await this.saveStats();
     this.clearData();
   }
 
@@ -127,7 +127,7 @@ export class ChronologyPage implements ViewWillEnter {
     if (chronology_stats_data.length > 20) {
       chronology_stats_data = chronology_stats_data.slice(-20);
     }
-    this.storage.set("chronology_stats_data", chronology_stats_data);
+    await this.storage.set("chronology_stats_data", chronology_stats_data);
 
     let chronology_data = await this.storage.get("chronology_data") || {won: 0, lost: 0}
     if(this.won) {
@@ -136,7 +136,7 @@ export class ChronologyPage implements ViewWillEnter {
     else {
       chronology_data = {won: chronology_data["won"], lost: chronology_data["lost"] + 1};
     }
-    this.storage.set("chronology_data", chronology_data);
+    await this.storage.set("chronology_data", chronology_data);
   }
 
   formatDate(date: Date): string {

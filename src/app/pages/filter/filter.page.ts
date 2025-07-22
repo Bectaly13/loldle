@@ -44,7 +44,7 @@ export class FilterPage implements ViewWillEnter {
     
     this.getChampionsData();
 
-    this.startGame();
+    await this.startGame();
   }
 
   getChampionsData() {
@@ -56,7 +56,7 @@ export class FilterPage implements ViewWillEnter {
     const attribute_data = await this.storage.get("filter_attribute_data");
 
     if(!attribute_data) {
-      this.resetGame();
+      await this.resetGame();
     }
 
     else {
@@ -70,13 +70,17 @@ export class FilterPage implements ViewWillEnter {
     }
   }
 
-  resetGame() {
+  async resetGame() {
+    this.selectedChoices = Array(this.choices.length).fill(false);
+    this.showResult = false;
+    this.won = false;
+    
     const randomIndex = Math.floor(Math.random() * this.possibleAttributes.length);
     this.attribute = this.possibleAttributes[randomIndex];
-    this.storage.set("filter_attribute_data", this.attribute);
+    await this.storage.set("filter_attribute_data", this.attribute);
 
     this.attributeDisplay = this.possibleAttributesDisplay[randomIndex];
-    this.storage.set("filter_attribute_display_data", this.attributeDisplay);
+    await this.storage.set("filter_attribute_display_data", this.attributeDisplay);
 
     const rawValues = this.champions.map(c => (c as any)[this.attribute]);
     const flattened = rawValues.reduce((acc: string[], val: any) => {
@@ -88,15 +92,11 @@ export class FilterPage implements ViewWillEnter {
     }, []);
     const randomIndex2 = Math.floor(Math.random() * flattened.length);
     this.value = flattened[randomIndex2];
-    this.storage.set("filter_value_data", this.value);
+    await this.storage.set("filter_value_data", this.value);
 
     const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
     this.choices = shuffledChampions.slice(0, 9);
-    this.storage.set("filter_choices_data", this.choices);
-
-    this.selectedChoices = Array(this.choices.length).fill(false);
-    this.showResult = false;
-    this.won = false;
+    await this.storage.set("filter_choices_data", this.choices);
   }
 
   toggleSelection(index: number) {
@@ -124,7 +124,7 @@ export class FilterPage implements ViewWillEnter {
 
       let streak_data = await this.storage.get("filter_streak_data") || 0;
       streak_data++;
-      this.storage.set("filter_streak_data", streak_data);
+      await this.storage.set("filter_streak_data", streak_data);
 
       this.ach.updateValue("filter_streak", streak_data);
 
@@ -136,7 +136,7 @@ export class FilterPage implements ViewWillEnter {
       await this.ach.updateDailyWinCount();
     }
     else {
-      this.storage.set("filter_streak_data", 0);
+      await this.storage.set("filter_streak_data", 0);
 
       const selected = this.selectedChoices;
       const correct = this.correctIndexes;
@@ -155,7 +155,7 @@ export class FilterPage implements ViewWillEnter {
 
     await this.ach.updateDailyPlayCount();
 
-    this.saveStats();
+    await this.saveStats();
     this.clearData();
   }
 
@@ -218,7 +218,7 @@ export class FilterPage implements ViewWillEnter {
     if (filter_stats_data.length > 20) {
       filter_stats_data = filter_stats_data.slice(-20);
     }
-    this.storage.set("filter_stats_data", filter_stats_data);
+    await this.storage.set("filter_stats_data", filter_stats_data);
 
     let filter_data = await this.storage.get("filter_data") || {won: 0, lost: 0}
     if(this.won) {
@@ -227,7 +227,7 @@ export class FilterPage implements ViewWillEnter {
     else {
       filter_data = {won: filter_data["won"], lost: filter_data["lost"] + 1};
     }
-    this.storage.set("filter_data", filter_data);
+    await this.storage.set("filter_data", filter_data);
   }
 
   formatDate(date: Date): string {

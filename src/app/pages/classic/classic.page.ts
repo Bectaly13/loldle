@@ -40,7 +40,7 @@ export class ClassicPage implements ViewWillEnter {
 
     this.getChampionsData();
     
-    this.startGame();
+    await this.startGame();
   }
 
   onInputChange() {
@@ -60,7 +60,7 @@ export class ClassicPage implements ViewWillEnter {
     this.filteredChampions = [];
 
     this.history.unshift(champion);
-    this.storage.set("classic_history_data", this.history);
+    await this.storage.set("classic_history_data", this.history);
 
     if (champion.name === this.answer.name) {
       this.ach.increment("classic_enjoyer");
@@ -84,14 +84,14 @@ export class ClassicPage implements ViewWillEnter {
 
       this.won = true;
       this.content.scrollToTop(500);
-      this.saveStats();
+      await this.saveStats();
       this.clearData();
     }
   }
 
-  submitByEnter() {
+  async submitByEnter() {
     if (this.filteredChampions.length > 0) {
-      this.selectChampion(this.filteredChampions[0]);
+      await this.selectChampion(this.filteredChampions[0]);
     }
   }
 
@@ -118,18 +118,18 @@ export class ClassicPage implements ViewWillEnter {
     return hasOverlap ? 'orange' : 'red';
   }
 
-  resetGame() {
+  async resetGame() {
     this.query = "";
     this.filteredChampions = [];
+    
+    this.won = false;
 
     this.history = [];
-    this.storage.set("classic_history_data", this.history);
+    await this.storage.set("classic_history_data", this.history);
 
     const index: number = Math.floor(Math.random() * this.n);
     this.answer = this.champions[index];
-    this.storage.set("classic_answer_data", this.answer);
-
-    this.won = false;
+    await this.storage.set("classic_answer_data", this.answer);
   }
 
   async confirmReset() {
@@ -143,10 +143,10 @@ export class ClassicPage implements ViewWillEnter {
         },
         {
           text: "Confirmer",
-          handler: (() => {
-            this.saveStats();
+          handler: (async () => {
+            await this.saveStats();
             this.clearData();
-            this.resetGame();})
+            await this.resetGame();})
         }
       ]
     });
@@ -158,7 +158,7 @@ export class ClassicPage implements ViewWillEnter {
     const answer_data = await this.storage.get("classic_answer_data");
 
     if(!answer_data) {
-      this.resetGame();
+      await this.resetGame();
     }
 
     else {
@@ -188,7 +188,7 @@ export class ClassicPage implements ViewWillEnter {
     if (classic_stats_data.length > 20) {
       classic_stats_data = classic_stats_data.slice(-20);
     }
-    this.storage.set("classic_stats_data", classic_stats_data);
+    await this.storage.set("classic_stats_data", classic_stats_data);
 
     let classic_data = await this.storage.get("classic_data") || {won: 0, abandoned: 0}
     if(this.won) {
@@ -197,7 +197,7 @@ export class ClassicPage implements ViewWillEnter {
     else {
       classic_data = {won: classic_data["won"], abandoned: classic_data["abandoned"] + 1};
     }
-    this.storage.set("classic_data", classic_data);
+    await this.storage.set("classic_data", classic_data);
   }
 
   clearData() {
