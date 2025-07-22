@@ -24,12 +24,13 @@ export class FilterPage implements ViewWillEnter {
   attributeDisplay!: string;
   value!: string;
   choices: Champion[] = [];
+  choicesNumber: number = 9;
 
   possibleAttributes: string[] = ["gender", "role", "species", "resource", "range", "region", "year"];
   possibleAttributesDisplay: string[] = ["le genre", "le rôle", "l'espèce", "la ressource", "la portée", "la région", "l'année de sortie"];
   possibleAttributesStats: string[] = ["Genre", "Rôle", "Espèce", "Ressource", "Portée", "Région", "Année de sortie"];
 
-  selectedChoices: boolean[] = [];
+  selectedChoices: boolean[] = Array(this.choicesNumber).fill(false);
   correctIndexes: boolean[] = [];
 
   showResult: boolean = false;
@@ -94,10 +95,10 @@ export class FilterPage implements ViewWillEnter {
     await this.storage.set("filter_value_data", this.value);
 
     const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
-    this.choices = shuffledChampions.slice(0, 9);
+    this.choices = shuffledChampions.slice(0, this.choicesNumber);
     await this.storage.set("filter_choices_data", this.choices);
 
-    this.selectedChoices = Array(this.choices.length).fill(false);
+    this.selectedChoices = Array(this.choicesNumber).fill(false);
   }
 
   toggleSelection(index: number) {
@@ -196,7 +197,7 @@ export class FilterPage implements ViewWillEnter {
     let answer: string[] = [];
     let user_answer: string[] = [];
 
-    for(let i = 0; i<this.choices.length; i++) {
+    for(let i = 0; i<this.choicesNumber; i++) {
       if(this.correctIndexes[i]) {
         answer.push(this.choices[i].name);
       }
