@@ -311,6 +311,7 @@ export class AchievementsService {
 
   async updateDailyStreak() {
     const today = new Date();
+    const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const todayStr = today.toISOString().slice(0, 10);
 
     const lastDayStr = await this.storage.get("daily_streak_last_day");
@@ -318,12 +319,15 @@ export class AchievementsService {
 
     if (lastDayStr) {
       const lastDay = new Date(lastDayStr);
-      const diff = (today.getTime() - lastDay.getTime()) / (1000 * 60 * 60 * 24);
+      const lastDayDateOnly = new Date(lastDay.getFullYear(), lastDay.getMonth(), lastDay.getDate());
 
-      if (diff === 1) {
+      const diffDays = Math.floor(
+        (todayDateOnly.getTime() - lastDayDateOnly.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (diffDays === 1) {
         streak++;
-      } else if (diff === 0) {
-      } else {
+      } else if (diffDays !== 0) {
         streak = 1;
       }
     } else {
