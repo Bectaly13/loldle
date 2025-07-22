@@ -46,7 +46,7 @@ export class LearnPage implements ViewWillEnter {
     const clientHeight = scrollEl.clientHeight;
     const scrollHeight = scrollEl.scrollHeight;
 
-    const threshold = 200;
+    const threshold = 1000;
     const position = scrollTop + clientHeight;
 
     if (position + threshold >= scrollHeight) {
