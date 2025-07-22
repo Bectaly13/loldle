@@ -71,7 +71,6 @@ export class FilterPage implements ViewWillEnter {
   }
 
   async resetGame() {
-    this.selectedChoices = Array(this.choices.length).fill(false);
     this.showResult = false;
     this.won = false;
     
@@ -97,6 +96,8 @@ export class FilterPage implements ViewWillEnter {
     const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
     this.choices = shuffledChampions.slice(0, 9);
     await this.storage.set("filter_choices_data", this.choices);
+
+    this.selectedChoices = Array(this.choices.length).fill(false);
   }
 
   toggleSelection(index: number) {

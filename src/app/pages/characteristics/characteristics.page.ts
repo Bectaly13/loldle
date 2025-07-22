@@ -75,7 +75,6 @@ export class CharacteristicsPage implements ViewWillEnter {
   }
 
   async resetGame() {
-    this.selectedChoices = new Array(this.choices.length).fill(false);
     this.showResult = false;
     this.won = false;
     
@@ -106,6 +105,8 @@ export class CharacteristicsPage implements ViewWillEnter {
       a.localeCompare(b, "fr", {sensitivity: "base"})
     );
     await this.storage.set("characteristics_choices_data", this.choices);
+    
+    this.selectedChoices = new Array(this.choices.length).fill(false);
   }
 
   toggleCheckbox(index: number) {

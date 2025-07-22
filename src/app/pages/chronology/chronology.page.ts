@@ -56,13 +56,14 @@ export class ChronologyPage implements ViewWillEnter {
   }
 
   async resetGame() {
-    this.slots = Array(this.choices.length).fill(null);
     this.showResult = false;
     this.won = false;
     
     const shuffledChampions = [...this.champions].sort(() => Math.random() - 0.5);
     this.choices = shuffledChampions.slice(0, 3);
     await this.storage.set("chronology_choices_data", this.choices);
+
+    this.slots = Array(this.choices.length).fill(null);
   }
 
   moveLeft(index: number) {
