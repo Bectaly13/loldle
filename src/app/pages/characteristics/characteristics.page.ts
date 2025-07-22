@@ -96,14 +96,14 @@ export class CharacteristicsPage implements ViewWillEnter {
     const rawValues = this.champions.map(c => (c as any)[this.attribute]);
     const flattened = rawValues.reduce((acc: string[], val: any) => {
       if (Array.isArray(val)) {
-        return acc.concat(val);
+        return acc.concat(val.map(v => String(v)));
       } else {
-        return acc.concat([val]);
+        return acc.concat([String(val)]);
       }
     }, []);
-    this.choices = [...new Set(flattened)].sort((a, b) =>
-      a.localeCompare(b, "fr", {sensitivity: "base"})
-    );
+    this.choices = [...new Set(flattened)]
+      .filter(v => typeof v === "string" && v.trim() !== "")
+      .sort((a, b) => a.localeCompare(b, "fr", {sensitivity: "base"}));
     await this.storage.set("characteristics_choices_data", this.choices);
     
     this.selectedChoices = new Array(this.choices.length).fill(false);
