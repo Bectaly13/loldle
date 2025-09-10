@@ -36,7 +36,7 @@ export type Name =
   | "Varus" | "Vayne" | "Veigar" | "Vel'Koz" | "Vex" | "Vi" | "Viego" | "Viktor" | "Vladimir" | "Volibear"
   | "Warwick" | "Wukong"
   | "Xayah" | "Xerath" | "Xin Zhao"
-  | "Yasuo" | "Yone" | "Yorick" | "Yuumi"
+  | "Yasuo" | "Yone" | "Yorick" | "Yunara" | "Yuumi"
   | "Zac" | "Zed" | "Zeri" | "Ziggs" | "Zilean" | "Zoé" | "Zyra";
 
 export type Gender = "Autre" | "Féminin" | "Masculin";
@@ -258,6 +258,7 @@ export class ChampionsService {
     {name: "Yasuo", gender: "Masculin", role: ["Mid"], species: ["Humain", "Né magique"], resource: "Vent", range: ["Mêlée"], region: ["Ionia"], year: 2013},
     {name: "Yone", gender: "Masculin", role: ["Mid", "Top"], species: ["Humain", "Altéré Magiquement"], resource: "Sans mana", range: ["Mêlée"], region: ["Ionia"], year: 2020},
     {name: "Yorick", gender: "Masculin", role: ["Top", "Jungle"], species: ["Humain", "Altéré Magiquement"], resource: "Mana", range: ["Mêlée"], region: ["Îles Obscures"], year: 2011},
+    {name: "Yunara", gender: "Féminin", role: ["ADC"], species: ["Humain", "Spiritualiste"], resource: "Mana", range: ["À distance"], region: ["Ionia"], year: 2025},
     {name: "Yuumi", gender: "Féminin", role: ["Support"], species: ["Chat", "Altéré Magiquement"], resource: "Mana", range: ["À distance"], region: ["Bandle"], year: 2019},
     {name: "Zac", gender: "Masculin", role: ["Jungle"], species: ["Golem"], resource: "Coûts de santé", range: ["Mêlée"], region: ["Zaun"], year: 2013},
     {name: "Zed", gender: "Masculin", role: ["Jungle", "Mid"], species: ["Humain", "Altéré Magiquement"], resource: "Énergie", range: ["Mêlée"], region: ["Ionia"], year: 2012},

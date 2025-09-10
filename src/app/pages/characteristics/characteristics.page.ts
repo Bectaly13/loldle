@@ -90,7 +90,9 @@ export class CharacteristicsPage implements ViewWillEnter {
     await this.storage.set("characteristics_attribute_display_data", this.attributeDisplay);
 
     const rawAnswer = (this.champion as any)[this.attribute];
-    this.answer = Array.isArray(rawAnswer) ? rawAnswer : [rawAnswer];
+    this.answer = Array.isArray(rawAnswer) 
+      ? rawAnswer.map(v => String(v)) 
+      : [String(rawAnswer)];
     await this.storage.set("characteristics_answer_data", this.answer);
 
     const rawValues = this.champions.map(c => (c as any)[this.attribute]);
